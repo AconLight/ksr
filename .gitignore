@@ -1,6 +1,7 @@
 /*
 !/.gitignore
 !/src/
+!/.idea/
 !pom.xml
 
 
