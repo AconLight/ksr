@@ -1,9 +1,10 @@
-package data.dataLoading;
+package dataOperations.dataLoading;
 
-import data.ClassifiedObject;
-import data.Feature;
-import data.FeatureVector;
-import data.dataLoading.fileReaders.IFileReader;
+import dataOperations.ClassifiedObject;
+import dataOperations.FeatureVector;
+import dataOperations.dataLoading.featureExtractors.IFeatureExtractor;
+import dataOperations.dataLoading.featureExtractors.MainFeatureExtractor;
+import dataOperations.dataLoading.fileReaders.IFileReader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ public class DataLoader {
         File[] directoryListing = dir.listFiles();
         if (directoryListing != null) {
             for (File f : directoryListing) {
-                objects.add(reader.read(f));
+                objects.addAll(reader.read(f));
             }
         } else {
             throw new IllegalArgumentException();
@@ -26,19 +27,22 @@ public class DataLoader {
         return objects;
     }
 
-    public static List<Feature> loadFeatureVectors(String directory, IFileReader reader, FeatureExtractor extractor) {
-        List<Feature> featureVectors = new ArrayList<Feature>();
+    public static List<FeatureVector> loadFeatureVectors(String directory, IFileReader reader, MainFeatureExtractor extractor) {
+        List<FeatureVector> featureVectors = new ArrayList<>();
 
         File dir = new File(directory);
         File[] directoryListing = dir.listFiles();
         if (directoryListing != null) {
             for (File f : directoryListing) {
-                ClassifiedObject object = reader.read(f);
-                featureVectors.add(extractor.extract(object));
+                List<ClassifiedObject> objects = reader.read(f);
+                for (ClassifiedObject o : objects) {
+                    featureVectors.add(extractor.extract(o));
+                }
             }
         } else {
             throw new IllegalArgumentException();
         }
+
 
         return featureVectors;
 

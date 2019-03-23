@@ -1,4 +1,4 @@
-package data;
+package dataOperations;
 
 public class Feature {
     private Double value;

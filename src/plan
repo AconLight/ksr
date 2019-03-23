@@ -6,5 +6,7 @@ Ekstrakcja cech:
 Dla wszystkich artykułów
 1. Załadować artykuł do pamięci
 2. Oczyścić:
-    -usunąć nieużyteczne słowa
-    -sprowadzić słowa do formy bez końcówek
+    -usunąć nieużyteczne słowa (stop lista)
+    -sprowadzić słowa do formy bez końcówek (stemming)
+    # Apache openNLP
+3.
