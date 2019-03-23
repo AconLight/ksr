@@ -1,0 +1,10 @@
+Nasze zbiory:
+Lista nieużytecznych słów, którą możemy rozszerzać na podstawie analizy tekstów
+
+Ekstrakcja cech:
+
+Dla wszystkich artykułów
+1. Załadować artykuł do pamięci
+2. Oczyścić:
+    -usunąć nieużyteczne słowa
+    -sprowadzić słowa do formy bez końcówek
