@@ -1,8 +1,7 @@
 package dataOperations.dataLoading;
 
-import dataOperations.ClassifiedObject;
+import dataOperations.classifiedObjects.ClassifiedObject;
 import dataOperations.FeatureVector;
-import dataOperations.dataLoading.featureExtractors.IFeatureExtractor;
 import dataOperations.dataLoading.featureExtractors.MainFeatureExtractor;
 import dataOperations.dataLoading.fileReaders.IFileReader;
 

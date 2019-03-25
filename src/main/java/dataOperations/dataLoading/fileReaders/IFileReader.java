@@ -1,6 +1,6 @@
 package dataOperations.dataLoading.fileReaders;
 
-import dataOperations.ClassifiedObject;
+import dataOperations.classifiedObjects.ClassifiedObject;
 
 import java.io.File;
 import java.util.List;

@@ -1,7 +1,8 @@
 package dataOperations.dataLoading.fileReaders;
 
 import config.Config;
-import dataOperations.ClassifiedObject;
+import dataOperations.classifiedObjects.Article;
+import dataOperations.classifiedObjects.ClassifiedObject;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,7 +12,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ExtractData {
+public class ExtractArticleData {
 
     public static ArrayList<HashMap<String, String>> extract(Path dirPath, String[] marks) {
         ArrayList<HashMap<String, String>> tempDataList = null;
@@ -30,7 +31,7 @@ public class ExtractData {
     }
 
     private static String[] marks = {"PLACES", "TITLE", "BODY"};
-
+    private static String[] acceptedPlaces = {"west-germany", "usa", "france", "uk", "canada", "japan"};
     private static String[] marksToRemove = {"D"};
 
     private static String opener(String mark) {
@@ -78,7 +79,7 @@ public class ExtractData {
                             line = "";
                         if (temp.split(closer(mark)).length > 0) {
                             temp = temp.split(closer(mark))[0];
-                            for (String markToRemove : ExtractData.marksToRemove) {
+                            for (String markToRemove : ExtractArticleData.marksToRemove) {
                                 temp = removeMark(temp, markToRemove);
                             }
                         }
@@ -101,21 +102,33 @@ public class ExtractData {
         }
     }
 
-    static ArrayList<ClassifiedObject> extractToObjects(Path path) {
-        ArrayList<ClassifiedObject> objects = new ArrayList<>();
-        ArrayList<HashMap<String, String>> extractedData = ExtractData.extract(path, ExtractData.marks);
+    private static boolean placeIsAccepted(String checkedPlace) {
+        for (String place : ExtractArticleData.acceptedPlaces) {
+            if (place.equals(checkedPlace)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    static ArrayList<Article> extractToObjects(Path path) {
+        ArrayList<Article> objects = new ArrayList<>();
+        ArrayList<HashMap<String, String>> extractedData = ExtractArticleData.extract(path, ExtractArticleData.marks);
         for (HashMap<String, String> data : extractedData) {
-            objects.add(new ClassifiedObject(data));
+            if (!placeIsAccepted(data.get("PLACES"))) {
+                continue;
+            }
+            objects.add(new Article(data, data.get("PLACES")));
         }
         return objects;
     }
 
     public static void main(String[] args) {
-        ArrayList<ClassifiedObject> objects = extractToObjects(Config.learningSetPath);
-        for (ClassifiedObject obj : objects) {
+        ArrayList<Article> objects = extractToObjects(Config.learningSetPath);
+        for (Article obj : objects) {
             System.out.println("title: " + obj.title);
-            System.out.println("body: " + obj.body);
-            System.out.println("1st place: " + obj.places[0]);
+            System.out.println("body: " + obj.text);
+            System.out.println("1st place: " + obj.getLabel());
             System.out.println();
         }
     }
