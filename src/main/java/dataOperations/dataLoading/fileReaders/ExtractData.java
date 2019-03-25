@@ -1,27 +1,23 @@
 package dataOperations.dataLoading.fileReaders;
 
+import config.Config;
 import dataOperations.ClassifiedObject;
-import ignore.MyPath;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileFilter;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ExtractData {
 
-    public static ArrayList<HashMap<String, String>> extract(String dirPath, String[] marks) {
+    public static ArrayList<HashMap<String, String>> extract(Path dirPath, String[] marks) {
         ArrayList<HashMap<String, String>> tempDataList = null;
         ArrayList<HashMap<String, String>> dataList = new ArrayList<>();
-        File reutersDir = new File(dirPath);
-        File[] sgmFiles = reutersDir.listFiles(new FileFilter() {
-            public boolean accept(File file) {
-                return file.getName().endsWith(".sgm");
-            }
-        });
+        File reutersDir = dirPath.toFile();
+        File[] sgmFiles = reutersDir.listFiles(file -> file.getName().endsWith(".sgm"));
         if (sgmFiles != null && sgmFiles.length > 0) {
             for (File sgmFile : sgmFiles) {
                 tempDataList = extractFile(sgmFile, marks);
@@ -55,7 +51,7 @@ public class ExtractData {
             BufferedReader reader = new BufferedReader(new FileReader(sgmFile));
             String line = "";
             while ((line = reader.readLine()) != null) {
-                HashMap<String, String> data = new HashMap<String, String>();
+                HashMap<String, String> data = new HashMap<>();
                 boolean flaga = false;
 //                System.out.println("enter the for");
                 for (String mark : marks) {
@@ -88,8 +84,7 @@ public class ExtractData {
                         }
 //                        System.out.println("adding mark");
                         data.put(mark, temp);
-                    }
-                    else {
+                    } else {
                         flaga = true;
                     }
                 }
@@ -106,18 +101,18 @@ public class ExtractData {
         }
     }
 
-    public static ArrayList<ClassifiedObject> extractToObjects() {
-        ArrayList<ClassifiedObject> objects = new ArrayList<ClassifiedObject>();
-        ArrayList<HashMap<String, String>> extractedData = ExtractData.extract(MyPath.path + "\\data", ExtractData.marks);
-        for (HashMap<String, String> data: extractedData) {
+    static ArrayList<ClassifiedObject> extractToObjects(Path path) {
+        ArrayList<ClassifiedObject> objects = new ArrayList<>();
+        ArrayList<HashMap<String, String>> extractedData = ExtractData.extract(path, ExtractData.marks);
+        for (HashMap<String, String> data : extractedData) {
             objects.add(new ClassifiedObject(data));
         }
         return objects;
     }
 
     public static void main(String[] args) {
-        ArrayList<ClassifiedObject> objects = extractToObjects();
-        for (ClassifiedObject obj: objects) {
+        ArrayList<ClassifiedObject> objects = extractToObjects(Config.learningSetPath);
+        for (ClassifiedObject obj : objects) {
             System.out.println("title: " + obj.title);
             System.out.println("body: " + obj.body);
             System.out.println("1st place: " + obj.places[0]);

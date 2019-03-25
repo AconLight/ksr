@@ -1,8 +1,0 @@
-main\App.class
-core\Knn.class
-runner\BasicRunner.class
-config\Config.class
-config\Config$ConfigBuilder.class
-runner\Configurations.class
-config\Consts.class
-data\DataLoader.class

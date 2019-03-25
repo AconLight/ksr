@@ -1,14 +1,9 @@
 package config;
 
-import lombok.Builder;
-import metrics.IMetric;
-import word.similarity.IWordSimilarity;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
-@Builder
 public class Config {
-    private double KNN_K; // const K in KNN algorithm
-    private IMetric OCCURRENCE_METRIC; // to implement the importance of occurrence number (for instance big number may be bad as professor Niewiadomski said)
-    private IMetric WORD_SIMILARITY_METRIC; // to implement soft or hard matching of the given key words
-    private IMetric VECTOR_DISTANCE_METRIC; // between 
-    private IWordSimilarity WORD_SIMILARITY;
+    public static final Path rootPath = Paths.get(".");
+    public static final Path learningSetPath = rootPath.resolve("data").resolve("learningSet");
 }
