@@ -1,4 +1,4 @@
-package dataOperations.dataLoading.featureExtractors;
+package dataOperations.featureExtractors;
 
 import classifiedObjects.ClassifiedObject;
 import dataOperations.Feature;

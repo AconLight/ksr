@@ -2,7 +2,7 @@ package dataOperations.dataLoading;
 
 import classifiedObjects.ClassifiedObject;
 import dataOperations.FeatureVector;
-import dataOperations.dataLoading.featureExtractors.MainFeatureExtractor;
+import dataOperations.featureExtractors.MainFeatureExtractor;
 import dataOperations.dataLoading.fileReaders.IFileReader;
 
 import java.nio.file.Path;
