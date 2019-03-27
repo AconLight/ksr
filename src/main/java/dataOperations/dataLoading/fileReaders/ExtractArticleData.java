@@ -33,6 +33,7 @@ public class ExtractArticleData {
     private static String[] marks = {"PLACES", "TITLE", "BODY"};
     private static String[] acceptedPlaces = {"west-germany", "usa", "france", "uk", "canada", "japan"};
     private static String[] marksToRemove = {"D"};
+    private static String[] stringsToRemove = {"REUTER", "&#3;"};
 
     private static String opener(String mark) {
         return "<" + mark + ">";
@@ -44,6 +45,10 @@ public class ExtractArticleData {
 
     private static String removeMark(String text, String mark) {
         return text.replaceAll(opener(mark), "").replaceAll(closer(mark), " ");
+    }
+
+    private static String removeString(String text, String toRemove) {
+        return text.replaceAll(toRemove, "");
     }
 
     private static ArrayList<HashMap<String, String>> extractFile(File sgmFile, String[] marks) {
@@ -65,13 +70,16 @@ public class ExtractArticleData {
 //                            System.out.println("breaked");
                             break;
                         }
-                        temp += b;
+                        temp += b + " ";
                     }
 //                    System.out.println("entering the if");
                     if (temp.contains(opener(mark))) {
                         temp = temp.split(opener(mark))[1];
                         while (!temp.contains(closer(mark))) {
-                            temp += reader.readLine();
+                            temp += reader.readLine() + " ";
+                            for(String toRemove: stringsToRemove) {
+                                temp = removeString(temp, toRemove);
+                            }
                         }
                         if (temp.split(closer(mark)).length > 1)
                             line = temp.split(closer(mark))[1];
