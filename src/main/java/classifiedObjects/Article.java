@@ -1,19 +1,22 @@
-package dataOperations.classifiedObjects;
+package classifiedObjects;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class Article extends ClassifiedObject {
-    public String text;
-    public String title;
+    private String text;
+    private String title;
     private String[] textWords;
 
     public Article(HashMap<String, String> data, String label) {
-        super(label);
+        this.label = label;
         text = data.get("BODY");
         title = data.get("TITLE");
         textWords = text.split("\\s+");
+    }
+
+    @Override
+    public String toString() {
+        return "Label:\t" + label + "\n title:\t" + title + "\n text:\t" + text;
     }
 
     public String getText() {

@@ -1,6 +1,6 @@
 package dataOperations.dataLoading.featureExtractors;
 
-import dataOperations.classifiedObjects.ClassifiedObject;
+import classifiedObjects.ClassifiedObject;
 import dataOperations.Feature;
 
 public interface IFeatureExtractor {

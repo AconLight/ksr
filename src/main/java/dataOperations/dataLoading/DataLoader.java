@@ -1,20 +1,20 @@
 package dataOperations.dataLoading;
 
-import dataOperations.classifiedObjects.ClassifiedObject;
+import classifiedObjects.ClassifiedObject;
 import dataOperations.FeatureVector;
 import dataOperations.dataLoading.featureExtractors.MainFeatureExtractor;
 import dataOperations.dataLoading.fileReaders.IFileReader;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
 
-public class DataLoader {
-    public static List<ClassifiedObject> loadObjects(String directory, IFileReader reader) {
-        List<ClassifiedObject> objects = new ArrayList<ClassifiedObject>();
+public class DataLoader<T extends ClassifiedObject> {
+    public List<T> loadObjects(Path directory, IFileReader<T> reader) {
+        List<T> objects = new ArrayList<>();
 
-        File dir = new File(directory);
-        File[] directoryListing = dir.listFiles();
+        File[] directoryListing = directory.toFile().listFiles();
         if (directoryListing != null) {
             for (File f : directoryListing) {
                 objects.addAll(reader.read(f));
@@ -26,15 +26,15 @@ public class DataLoader {
         return objects;
     }
 
-    public static List<FeatureVector> loadFeatureVectors(String directory, IFileReader reader, MainFeatureExtractor extractor) {
+    public List<FeatureVector> loadFeatureVectors(String directory, IFileReader<T> reader, MainFeatureExtractor<T> extractor) {
         List<FeatureVector> featureVectors = new ArrayList<>();
 
         File dir = new File(directory);
         File[] directoryListing = dir.listFiles();
         if (directoryListing != null) {
             for (File f : directoryListing) {
-                List<ClassifiedObject> objects = reader.read(f);
-                for (ClassifiedObject o : objects) {
+                List<T> objects = reader.read(f);
+                for (T o : objects) {
                     featureVectors.add(extractor.extract(o));
                 }
             }
