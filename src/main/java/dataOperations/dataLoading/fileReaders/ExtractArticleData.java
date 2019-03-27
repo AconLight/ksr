@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class ExtractArticleData {
 
@@ -104,7 +105,7 @@ public class ExtractArticleData {
 
     private static boolean placeIsAccepted(String checkedPlace) {
         for (String place : ExtractArticleData.acceptedPlaces) {
-            if (place.equals(checkedPlace)) {
+            if (Objects.equals(place, checkedPlace)) {
                 return true;
             }
         }
@@ -115,7 +116,7 @@ public class ExtractArticleData {
         ArrayList<Article> objects = new ArrayList<>();
         ArrayList<HashMap<String, String>> extractedData = ExtractArticleData.extract(path, ExtractArticleData.marks);
         for (HashMap<String, String> data : extractedData) {
-            if (!placeIsAccepted(data.get("PLACES"))) {
+            if (!placeIsAccepted(data.get("PLACES").trim())) {
                 continue;
             }
             objects.add(new Article(data, data.get("PLACES")));
