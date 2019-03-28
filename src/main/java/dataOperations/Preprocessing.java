@@ -11,4 +11,11 @@ public class Preprocessing {
         return text;
     }
 
+    public static String[] lemme(String[] textWords) {
+        return textWords;
+    }
+
+    public static String[] stem(String[] textWords) {
+        return textWords;
+    }
 }
