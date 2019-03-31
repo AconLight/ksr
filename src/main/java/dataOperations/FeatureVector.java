@@ -12,14 +12,12 @@ public class FeatureVector {
         return features;
     }
 
-
     public String getLabel() {
         return label;
     }
 
-
-    public void addFeature(Feature feature) {
-        this.features.add(feature);
+    public void addFeatures(List<Feature> features) {
+        this.features.addAll(features);
     }
 
     private String label;

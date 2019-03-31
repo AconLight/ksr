@@ -12,7 +12,7 @@ public class MainFeatureExtractor<T extends ClassifiedObject> {
 
     public FeatureVector extract(T object) {
         FeatureVector vector = new FeatureVector(object.getLabel());
-        extractors.forEach(extractor -> vector.addFeature(extractor.extract(object)));
+        extractors.forEach(extractor -> vector.addFeatures(extractor.extract(object)));
         return vector;
     }
 

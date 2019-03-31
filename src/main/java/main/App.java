@@ -2,7 +2,7 @@ package main;
 
 import classifiedObjects.Article;
 import config.Config;
-import dataOperations.TextStatistics;
+import dataOperations.textStatistics.TextStatistics;
 import dataOperations.dataLoading.DataLoader;
 import dataOperations.dataLoading.fileReaders.ReutersArticleReader;
 import dataOperations.Preprocessor;
@@ -25,8 +25,8 @@ public class App {
         List<String> prunedWords = preprocessor.applyStopList(words);
 
         System.out.println(prunedWords);
-        System.out.println(TextStatistics.wordOccurrences(words));
-        System.out.println(TextStatistics.wordOccurrences(prunedWords));
+        System.out.println(new TextStatistics(words));
+        System.out.println(new TextStatistics(prunedWords));
 
     }
 }
