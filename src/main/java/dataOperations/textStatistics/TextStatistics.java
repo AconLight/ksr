@@ -8,9 +8,6 @@ public class TextStatistics {
     private int uniqueWords;
     private int allWords;
     private double wordRepetitiveness;
-    private double averageSentenceSentiment;
-    private double minSentenceSentiment;
-    private double maxSentenceSentiment;
 
     public TextStatistics(List<String> words) {
         wordOccurrences = wordOccurrences(words);
@@ -58,9 +55,6 @@ public class TextStatistics {
                 ",\n\tuniqueWords=" + uniqueWords +
                 ",\n\tallWords=" + allWords +
                 ",\n\twordRepetitiveness=" + wordRepetitiveness +
-                ",\n\taverageSentenceSentiment=" + averageSentenceSentiment +
-                ",\n\tminSentenceSentiment=" + minSentenceSentiment +
-                ",\n\tmaxSentenceSentiment=" + maxSentenceSentiment +
                 "\n}";
     }
 }
