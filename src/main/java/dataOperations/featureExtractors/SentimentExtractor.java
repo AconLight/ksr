@@ -1,18 +1,62 @@
 package dataOperations.featureExtractors;
 
-import classifiedObjects.ClassifiedObject;
+import classifiedObjects.Article;
 import dataOperations.Feature;
+import edu.stanford.nlp.ling.CoreAnnotations;
+import edu.stanford.nlp.neural.rnn.RNNCoreAnnotations;
+import edu.stanford.nlp.pipeline.Annotation;
+import edu.stanford.nlp.sentiment.SentimentCoreAnnotations;
+import edu.stanford.nlp.trees.Tree;
+import edu.stanford.nlp.util.CoreMap;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SentimentExtractor implements IFeatureExtractor {
+import dataOperations.Pipelines;
+import org.ejml.simple.SimpleMatrix;
+import utils.Utils;
+
+
+public class SentimentExtractor implements IFeatureExtractor<Article> {
     @Override
-    public List<Feature> extract(ClassifiedObject object) {
+    public List<Feature> extract(Article article) {
         List<Feature> features = new ArrayList<>();
-        features.add(new Feature(0., "average sentence sentiment"));
-        features.add(new Feature(0., "min sentence sentiment"));
-        features.add(new Feature(0., "max sentence sentiment"));
+        List<Double> sentiments = textSentiment(article.getText());
+
+        features.add(new Feature(averageSentiment(sentiments), "average sentence sentiment"));
+        features.add(new Feature(minSentiment(sentiments), "min sentence sentiment"));
+        features.add(new Feature(maxSentiment(sentiments), "max sentence sentiment"));
         return features;
+    }
+
+    private Double averageSentiment(List<Double> sentiments) {
+        double sum = 0;
+        for (Double s : sentiments) {
+            sum += s;
+        }
+        return sum / sentiments.size();
+    }
+
+    private Double minSentiment(List<Double> sentiments) {
+        return sentiments.stream().min(Double::compareTo).get();
+    }
+
+    private Double maxSentiment(List<Double> sentiments) {
+        return sentiments.stream().max(Double::compareTo).get();
+    }
+
+    private List<Double> textSentiment(String text) {
+        List<Double> sentiments = new ArrayList<>();
+        Annotation document = new Annotation(text);
+
+        Pipelines.sentimentPipeline.annotate(document);
+
+        List<CoreMap> sentences = document.get(CoreAnnotations.SentencesAnnotation.class);
+        for (CoreMap sentence : sentences) {
+            Tree tree = sentence.get(SentimentCoreAnnotations.SentimentAnnotatedTree.class);
+            SimpleMatrix sm = RNNCoreAnnotations.getPredictions(tree);
+            sentiments.add(Utils.sentimentMatrixToDouble(sm));
+        }
+        return sentiments;
     }
 }

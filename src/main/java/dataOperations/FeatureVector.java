@@ -23,4 +23,12 @@ public class FeatureVector {
     private String label;
 
     private List<Feature> features = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "FeatureVector{" +
+                "label='" + label + '\'' +
+                ", features=" + features +
+                '}';
+    }
 }

@@ -5,6 +5,6 @@ import dataOperations.Feature;
 
 import java.util.List;
 
-public interface IFeatureExtractor {
-    List<Feature> extract(ClassifiedObject object);
+public interface IFeatureExtractor<T extends ClassifiedObject> {
+    List<Feature> extract(T object);
 }

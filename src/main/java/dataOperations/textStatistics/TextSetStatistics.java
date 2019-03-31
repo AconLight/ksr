@@ -12,7 +12,6 @@ public class TextSetStatistics {
     private double averageWordCount;
 
     private Map<String, Integer> wordOverallOccurrences;
-
     private Map<String, Integer> wordSummedOccurrences;
 
     public TextSetStatistics(List<TextStatistics> statisticsList) {
