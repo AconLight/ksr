@@ -47,11 +47,31 @@ public class ReutersArticleReader implements IFileReader<Article> {
             ArrayList<HashMap<String, String>> dataList = new ArrayList<>();
             BufferedReader reader = new BufferedReader(new FileReader(sgmFile));
             String line;
+
+            reader = new BufferedReader(new FileReader(sgmFile));
+
+            /*while ((line = reader.readLine()) != null) {
+                if (line.contains("<REUTERS")) {
+                    String temp = line;
+                    temp = temp.split("<REUTERS")[1];
+                    while ((temp += reader.readLine()) != null) {
+                        if (temp.contains("<REUTERS")) {
+                            break;
+                        }
+                    }
+                    if (!temp.contains("<PLACES") || !temp.contains("<TITLE") || !temp.contains("<BODY")) {
+                        System.out.println(temp);
+                        break;
+                    }
+                }
+            }*/
             while ((line = reader.readLine()) != null) {
                 HashMap<String, String> data = new HashMap<>();
                 boolean flaga = false;
 //                System.out.println("enter the for");
-                for (String mark : marks) {
+                for (int i = 0; i < marks.length; i++) {
+                    String mark = marks[i];
+
                     String temp = line;
                     String b = "asd";
                     while (!temp.contains(opener(mark))) {
@@ -63,8 +83,16 @@ public class ReutersArticleReader implements IFileReader<Article> {
                         }
                         temp += b + " ";
                     }
+
 //                    System.out.println("entering the if");
                     if (temp.contains(opener(mark))) {
+                        if (temp.contains("<REUTERS") && mark != marks[0]) {
+                            //System.out.println("dupa");
+                            //System.out.println(temp);
+                            line = temp;
+                            flaga = true;
+                            break;
+                        }
                         temp = temp.split(opener(mark))[1];
                         while (!temp.contains(closer(mark))) {
                             temp += reader.readLine() + " ";
@@ -95,6 +123,7 @@ public class ReutersArticleReader implements IFileReader<Article> {
                 }
             }
             reader.close();
+
             return dataListToToArticle(dataList);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -119,6 +148,10 @@ public class ReutersArticleReader implements IFileReader<Article> {
             }
         }
         return false;
+    }
+
+    public static void main(String[] args) {
+
     }
 }
 
