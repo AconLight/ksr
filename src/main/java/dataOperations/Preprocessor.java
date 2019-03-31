@@ -60,7 +60,7 @@ public class Preprocessor {
         return lemmas;
     }
 
-    public String[] stem(String[] textWords) {
-        return textWords;
+    public String[] stem(String[] textWords) throws Exception {
+        throw new Exception("not implemented");
     }
 }

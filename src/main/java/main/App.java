@@ -2,11 +2,13 @@ package main;
 
 import classifiedObjects.Article;
 import config.Config;
+import dataOperations.textStatistics.TextSetStatistics;
 import dataOperations.textStatistics.TextStatistics;
 import dataOperations.dataLoading.DataLoader;
 import dataOperations.dataLoading.fileReaders.ReutersArticleReader;
 import dataOperations.Preprocessor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class App {
@@ -16,17 +18,18 @@ public class App {
         Preprocessor preprocessor = new Preprocessor();
 
         List<Article> articles = loader.loadObjects(Config.learningSetPath, reader);
-        Article a = articles.get(0);
 
-        System.out.println(a.getText());
-        List<String> words = preprocessor.lemme(a.getText());
-        System.out.println(words);
+        List<TextStatistics> s1 = new ArrayList<>();
+        for (Article a : articles) {
+            if (a.getLabel().equals("usa")) {
+                List<String> words = preprocessor.lemme(a.getText());
+                words = preprocessor.applyStopList(words);
+                s1.add(new TextStatistics(words));
+            }
+        }
 
-        List<String> prunedWords = preprocessor.applyStopList(words);
-
-        System.out.println(prunedWords);
-        System.out.println(new TextStatistics(words));
-        System.out.println(new TextStatistics(prunedWords));
-
+        TextSetStatistics ts1 = new TextSetStatistics(s1);
+        System.out.println(ts1);
+        System.out.println(articles.size());
     }
 }

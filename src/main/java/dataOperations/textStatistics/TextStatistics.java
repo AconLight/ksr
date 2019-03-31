@@ -1,39 +1,37 @@
 package dataOperations.textStatistics;
 
 import java.util.*;
-import java.util.stream.Collectors;
+
+import static utils.Utils.sortMap;
 
 public class TextStatistics {
-    private Map<String, Integer> wordOccurrences;
+    private Map<String, Integer> wordOccurrencesCount;
     private int uniqueWords;
     private int allWords;
     private double wordRepetitiveness;
 
     public TextStatistics(List<String> words) {
-        wordOccurrences = wordOccurrences(words);
+        wordOccurrencesCount = wordOccurrencesCount(words);
         allWords = words.size();
-        uniqueWords = wordOccurrences.size();
-        wordRepetitiveness = (double)uniqueWords / allWords;
+        uniqueWords = wordOccurrencesCount.size();
+        wordRepetitiveness = (double) uniqueWords / allWords;
     }
 
-    private Map<String, Integer> wordOccurrences(List<String> words) {
-        Map<String, Integer> wordOccurrences = new HashMap<>();
+    private Map<String, Integer> wordOccurrencesCount(List<String> words) {
+        Map<String, Integer> wordOccurrencesCount = new HashMap<>();
         words.forEach(w -> {
-            if (!wordOccurrences.containsKey(w)) {
-                wordOccurrences.put(w, 1);
+            if (!wordOccurrencesCount.containsKey(w)) {
+                wordOccurrencesCount.put(w, 1);
             } else {
-                wordOccurrences.put(w, wordOccurrences.get(w) + 1);
+                wordOccurrencesCount.put(w, wordOccurrencesCount.get(w) + 1);
             }
         });
 
-        return wordOccurrences.entrySet()
-                .stream()
-                .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+        return sortMap(wordOccurrencesCount);
     }
 
-    public Map<String, Integer> getWordOccurrences() {
-        return wordOccurrences;
+    public Map<String, Integer> getWordOccurrencesCount() {
+        return wordOccurrencesCount;
     }
 
     public int getUniqueWords() {
@@ -51,7 +49,7 @@ public class TextStatistics {
     @Override
     public String toString() {
         return "TextStatistics {" +
-                "\n\twordOccurrences=" + wordOccurrences +
+                "\n\twordOccurrencesCount=" + wordOccurrencesCount +
                 ",\n\tuniqueWords=" + uniqueWords +
                 ",\n\tallWords=" + allWords +
                 ",\n\twordRepetitiveness=" + wordRepetitiveness +
