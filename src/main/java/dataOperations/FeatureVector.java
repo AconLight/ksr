@@ -26,9 +26,9 @@ public class FeatureVector {
 
     @Override
     public String toString() {
-        return "FeatureVector{" +
+        return "FeatureVector [ " +
                 "label='" + label + '\'' +
-                ", features=" + features +
-                '}';
+                ",\nfeatures=" + features +
+                ']';
     }
 }
