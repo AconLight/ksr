@@ -6,7 +6,7 @@ import dataOperations.FeatureVector;
 import java.util.List;
 
 public class MainFeatureExtractor<T extends ClassifiedObject> {
-    public MainFeatureExtractor(List<IFeatureExtractor> extractors) {
+    public MainFeatureExtractor(List<IFeatureExtractor<T>> extractors) {
         this.extractors = extractors;
     }
 
@@ -16,5 +16,5 @@ public class MainFeatureExtractor<T extends ClassifiedObject> {
         return vector;
     }
 
-    private List<IFeatureExtractor> extractors;
+    private List<IFeatureExtractor<T>> extractors;
 }
