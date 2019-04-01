@@ -1,7 +1,6 @@
 package dataOperations.dataLoading.fileReaders;
 
 import classifiedObjects.Article;
-import dataOperations.preprocessing.FullPreprocessor;
 import dataOperations.preprocessing.IPreprocessor;
 
 import java.io.BufferedReader;

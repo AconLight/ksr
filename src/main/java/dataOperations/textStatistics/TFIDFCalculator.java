@@ -13,7 +13,7 @@ class TFIDFCalculator {
     }
 
     private double idf(List<List<String>> docs, String term) {
-        int n = 0;
+        double n = 1;
         for (List<String> doc : docs) {
             for (String word : doc) {
                 if (term.equalsIgnoreCase(word)) {
@@ -22,7 +22,7 @@ class TFIDFCalculator {
                 }
             }
         }
-        return Math.log(1 + docs.size() / (float) n);
+        return Math.log(docs.size() / n);
     }
 
     double tfIdf(List<String> doc, List<List<String>> docs, String term) {
