@@ -1,4 +1,4 @@
-package dataOperations;
+package dataOperations.preprocessing;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -11,10 +11,19 @@ import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.util.CoreMap;
 
 import static dataOperations.Pipelines.preprocessingPipeline;
+import static utils.Utils.joinList;
 
 
-public class Preprocessor {
-    public String cleanse(String text) {
+public class FullPreprocessor implements IPreprocessor<String> {
+    @Override
+    public String process(String s) {
+        s = cleanse(s);
+        List<String> words = lemme(s);
+        words = applyStopList(words);
+        return joinList(words, " ");
+    }
+
+    private String cleanse(String text) {
         text = text.toLowerCase();
         text = text.replaceAll("[^\\S ]+g", " "); // white chars to spaces
         text = text.replaceAll("[^a-z., ]", ""); // remove non a-z . , and spaces
@@ -24,7 +33,7 @@ public class Preprocessor {
         return text;
     }
 
-    public List<String> applyStopList(List<String> words) {
+    private List<String> applyStopList(List<String> words) {
         List<String> stopList = DataTables.getStopList();
         List<String> prunedWords = new ArrayList<>();
 
@@ -36,7 +45,7 @@ public class Preprocessor {
         return prunedWords;
     }
 
-    public List<String> lemme(String text) {
+    private List<String> lemme(String text) {
         List<String> lemmas = new LinkedList<>();
         Annotation document = new Annotation(text);
 
@@ -51,7 +60,7 @@ public class Preprocessor {
         return lemmas;
     }
 
-    public String[] stem(String[] textWords) throws Exception {
+    private String[] stem(String[] textWords) throws Exception {
         throw new Exception("not implemented");
     }
 }

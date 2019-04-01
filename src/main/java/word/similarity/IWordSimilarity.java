@@ -1,4 +1,5 @@
 package word.similarity;
 
-public class IWordSimilarity {
+public interface IWordSimilarity {
+    Double measure(String s1, String s2);
 }

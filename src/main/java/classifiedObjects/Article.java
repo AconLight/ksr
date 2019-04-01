@@ -1,17 +1,22 @@
 package classifiedObjects;
 
+import dataOperations.preprocessing.FullPreprocessor;
+import dataOperations.preprocessing.IPreprocessor;
+
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 public class Article extends ClassifiedObject {
     private String text;
     private String title;
-    private String[] textWords;
+    private List<String> textWords;
 
-    public Article(HashMap<String, String> data, String label) {
+    public Article(HashMap<String, String> data, String label, IPreprocessor<String> preprocessor) {
         this.label = label;
-        text = data.get("BODY");
+        text = preprocessor.process(data.get("BODY"));
         title = data.get("TITLE");
-        textWords = text.split("\\s+");
+        textWords = Arrays.asList(text.split("\\s+"));
     }
 
     @Override
@@ -21,5 +26,9 @@ public class Article extends ClassifiedObject {
 
     public String getText() {
         return text;
+    }
+
+    public List<String> getTextWords() {
+        return textWords;
     }
 }

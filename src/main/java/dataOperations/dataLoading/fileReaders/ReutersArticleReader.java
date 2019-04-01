@@ -1,6 +1,8 @@
 package dataOperations.dataLoading.fileReaders;
 
 import classifiedObjects.Article;
+import dataOperations.preprocessing.FullPreprocessor;
+import dataOperations.preprocessing.IPreprocessor;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,6 +14,11 @@ import java.util.List;
 import java.util.Objects;
 
 public class ReutersArticleReader implements IFileReader<Article> {
+    private IPreprocessor<String> preprocessor;
+
+    public ReutersArticleReader(IPreprocessor<String> preprocessor) {
+        this.preprocessor = preprocessor;
+    }
 
     @Override
     public List<Article> read(File file) {
@@ -69,9 +76,7 @@ public class ReutersArticleReader implements IFileReader<Article> {
                 HashMap<String, String> data = new HashMap<>();
                 boolean flaga = false;
 //                System.out.println("enter the for");
-                for (int i = 0; i < marks.length; i++) {
-                    String mark = marks[i];
-
+                for (String mark : marks) {
                     String temp = line;
                     String b = "asd";
                     while (!temp.contains(opener(mark))) {
@@ -86,7 +91,7 @@ public class ReutersArticleReader implements IFileReader<Article> {
 
 //                    System.out.println("entering the if");
                     if (temp.contains(opener(mark))) {
-                        if (temp.contains("<REUTERS") && mark != marks[0]) {
+                        if (temp.contains("<REUTERS") && !mark.equals(marks[0])) {
                             //System.out.println("dupa");
                             //System.out.println(temp);
                             line = temp;
@@ -135,7 +140,7 @@ public class ReutersArticleReader implements IFileReader<Article> {
         for (HashMap<String, String> articleData : dataList) {
             String label = articleData.get("PLACES").trim();
             if (placeIsAccepted(label)) {
-                articles.add(new Article(articleData, label));
+                articles.add(new Article(articleData, label, this.preprocessor));
             }
         }
         return articles;
@@ -150,9 +155,6 @@ public class ReutersArticleReader implements IFileReader<Article> {
         return false;
     }
 
-    public static void main(String[] args) {
-
-    }
 }
 
 

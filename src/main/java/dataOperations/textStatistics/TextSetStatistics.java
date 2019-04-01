@@ -4,10 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static utils.Utils.sortMap;
+import static utils.Utils.sortIntMap;
 
 public class TextSetStatistics {
     private double averageWordRepetitiveness;
+    private double overallWordRepetitiveness;
     private double averageUniqueWordsCount;
     private double averageWordCount;
 
@@ -16,6 +17,7 @@ public class TextSetStatistics {
 
     public TextSetStatistics(List<TextStatistics> statisticsList) {
         averageWordRepetitiveness = averageWordRepetitiveness(statisticsList);
+        overallWordRepetitiveness = overallWordRepetitiveness(statisticsList);
         averageUniqueWordsCount = averageUniqueWordsCount(statisticsList);
         averageWordCount = averageWordCount(statisticsList);
         wordOverallOccurrences = wordOverallOccurrences(statisticsList);
@@ -33,7 +35,7 @@ public class TextSetStatistics {
                 }
             }
         }
-        return sortMap(occurrences);
+        return sortIntMap(occurrences);
     }
 
     private Map<String, Integer> wordOverallOccurrences(List<TextStatistics> statisticsList) {
@@ -47,7 +49,17 @@ public class TextSetStatistics {
                 }
             }
         }
-        return sortMap(occurrences);
+        return sortIntMap(occurrences);
+    }
+
+    private double overallWordRepetitiveness(List<TextStatistics> statisticsList) {
+        int uniqueWords = 0;
+        int allWords = 0;
+        for (TextStatistics ts : statisticsList) {
+            uniqueWords += ts.getUniqueWords();
+            allWords += ts.getAllWords();
+        }
+        return (double) uniqueWords / allWords;
     }
 
     private double averageWordRepetitiveness(List<TextStatistics> statisticsList) {
@@ -90,6 +102,7 @@ public class TextSetStatistics {
     public String toString() {
         return "TextSetStatictics{" +
                 "\n\taverageWordRepetitiveness=" + averageWordRepetitiveness +
+                "\n\toverallWordRepetitiveness=" + overallWordRepetitiveness +
                 ",\n\taverageUniqueWordsCount=" + averageUniqueWordsCount +
                 ",\n\taverageWordCount=" + averageWordCount +
                 ",\n\twordOverallOccurrences=" + wordOverallOccurrences +

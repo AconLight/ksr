@@ -11,7 +11,23 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Utils {
-    public static Map<String, Integer> sortMap(Map<String, Integer> map) {
+    public static String joinList(List<String> strings, String joiner) {
+        StringBuilder builder = new StringBuilder();
+        for (String s : strings) {
+            builder.append(s);
+            builder.append(joiner);
+        }
+        return builder.toString();
+    }
+
+    public static Map<String, Integer> sortIntMap(Map<String, Integer> map) {
+        return map.entrySet()
+                .stream()
+                .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+    }
+
+    public static Map<String, Double> sortDoubleMap(Map<String, Double> map) {
         return map.entrySet()
                 .stream()
                 .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))

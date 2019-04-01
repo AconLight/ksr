@@ -2,7 +2,7 @@ package dataOperations.textStatistics;
 
 import java.util.*;
 
-import static utils.Utils.sortMap;
+import static utils.Utils.sortIntMap;
 
 public class TextStatistics {
     private Map<String, Integer> wordOccurrencesCount;
@@ -27,7 +27,7 @@ public class TextStatistics {
             }
         });
 
-        return sortMap(wordOccurrencesCount);
+        return sortIntMap(wordOccurrencesCount);
     }
 
     public Map<String, Integer> getWordOccurrencesCount() {
