@@ -11,6 +11,41 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Utils {
+    public static Map<String, List<String>> getTopNFromWeightedKeywordMap(Map<String, Map<String, Double>> map, int n) {
+        Map<String, List<String>> labelToKeyWords = new HashMap<>();
+        for (String label : map.keySet()) {
+            labelToKeyWords.put(label, new ArrayList<>());
+            Map<String, Double> wordToWeights = sortDoubleMap(map.get(label));
+            labelToKeyWords.put(label, getTopNFromDoubleMap(wordToWeights, n));
+        }
+        return labelToKeyWords;
+    }
+
+    public static List<String> getTopNFromDoubleMap(Map<String, Double> map, int n) {
+        List<String> topList = new ArrayList<>();
+        int i = 0;
+        for (String s : map.keySet()) {
+            topList.add(s);
+            i++;
+            if (i >= n) {
+                return topList;
+            }
+        }
+        return topList;
+    }
+    public static List<String> getTopNFromIntMap(Map<String, Integer> map, int n) {
+        List<String> topList = new ArrayList<>();
+        int i = 0;
+        for (String s : map.keySet()) {
+            topList.add(s);
+            i++;
+            if (i >= n) {
+                return topList;
+            }
+        }
+        return topList;
+    }
+
     public static String joinList(List<String> strings, String joiner) {
         StringBuilder builder = new StringBuilder();
         for (String s : strings) {
