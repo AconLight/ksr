@@ -18,6 +18,14 @@ import utils.Utils;
 
 
 public class SentimentExtractor implements IFeatureExtractor<Article> {
+
+    private int variant = 0;
+    @Override
+    public void setVariant(int i) {
+        variant = i;
+        // tutaj ustawiamy ewentualne wagi do konkretnego wariantu
+    }
+
     @Override
     public List<Feature> extract(Article article) {
         List<Feature> features = new ArrayList<>();
