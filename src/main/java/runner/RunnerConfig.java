@@ -6,8 +6,4 @@ public class RunnerConfig {
             FeatureExtractorsConfig.fec1(),
             FeatureExtractorsConfig.fec2()
     };
-    public static int[][] featureCombinations = {
-            {},
-            {}
-    };
 }
