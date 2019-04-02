@@ -7,6 +7,23 @@ import java.util.*;
 import static utils.Utils.sortDoubleMap;
 
 public class KeyWordExtractor {
+    public static HashMap<String, Map<String, Double>> getTopN(Map<String, Map<String, Double>> wordWeightsByLabel, int n) {
+        HashMap<String, Map<String, Double>> topNByLabels = new HashMap();
+        for (String label: wordWeightsByLabel.keySet()) {
+            Map<String, Double> toAdd = new HashMap<>();
+            int i = 0;
+            for (Map.Entry<String, Double> entry: wordWeightsByLabel.get(label).entrySet()) {
+                if (i >= n) {
+                    break;
+                }
+                toAdd.put(entry.getKey(), entry.getValue());
+                i++;
+            }
+            topNByLabels.put(label, toAdd);
+        }
+        return topNByLabels;
+    }
+
     public static Map<String, Map<String, Double>> extractWithTFIDF(List<Article> articles) {
         Map<String, Map<String, Double>> wordWeightsByLabel = new HashMap<>();
 

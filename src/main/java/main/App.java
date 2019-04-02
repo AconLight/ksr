@@ -33,6 +33,7 @@ public class App {
         List<Article> articles = loader.loadObjects(Config.learningSetPath, reader);
 
         Map<String, Map<String, Double>> keyWords = KeyWordExtractor.extractWithTFIDF(articles);
+        keyWords = KeyWordExtractor.getTopN(keyWords, 2);
         for (String label : keyWords.keySet()) {
             System.out.println(label);
             System.out.println(keyWords.get(label));
