@@ -6,7 +6,8 @@ import java.util.List;
 
 public class DataTables {
     public static List<String> getStopList() {
-        String[] stopList = {",",".", "'s", "xj-6", "stg", "co",
+//
+        String[] stopList = {"'s", "xj-6", "stg", "co", ",", ".", "mln", "pct", "reuter",
                 "a", "about", "above", "after", "again", "against", "ain", "all", "am", "an", "and", "any", "are", "aren",
                 "aren't", "as", "at", "be", "because", "been", "before", "being", "below", "between", "both", "but",
                 "by", "can", "couldn", "couldn't", "d", "did", "didn", "didn't", "do", "does", "doesn", "doesn't",
@@ -113,4 +114,5 @@ public class DataTables {
 
         return new ArrayList<>(Arrays.asList(stopList));
     }
+
 }

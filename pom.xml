@@ -34,6 +34,11 @@
             <version>3.9.2</version>
             <classifier>models</classifier>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simle</artifactId>
+            <version>1.8.0-alpha2</version>
+        </dependency>
     </dependencies>
 
     <build>
