@@ -8,9 +8,11 @@ import config.Config;
 import dataOperations.Feature;
 import dataOperations.dataLoading.DataLoader;
 import dataOperations.dataLoading.fileReaders.ReutersArticleReader;
+import utils.ExtractionMethod;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Runner {
     private List<Configurable> operations;
@@ -19,6 +21,7 @@ public class Runner {
     private List<List<Article>> articlesListTest;
     private List<List<Article>> articlesListTrain;
     private List<List<Feature>> featuresLists;
+    List<Map<ExtractionMethod, Map<String, List<String>>>> keyWordsList;
 
     public Runner() {
         runnerConfig = new RunnerConfig();
@@ -26,10 +29,12 @@ public class Runner {
         articlesListTest = new ArrayList<>();
         articlesListTrain = new ArrayList<>();
         featuresLists = new ArrayList<>();
+        keyWordsList = new ArrayList<>();
         operations = new ArrayList<>();
 
 
         operations.add(new ExtractingDataSets(1, articlesList, articlesListTest, articlesListTrain));
+        operations.add(new ExtractingKeyWords(3, articlesListTrain, keyWordsList));
         operations.add(new ExtractingFeatures(articlesList, 0, featuresLists));
 
 
