@@ -7,7 +7,6 @@ import dataOperations.textStatistics.KeyWordExtractor;
 import dataOperations.dataLoading.DataLoader;
 import dataOperations.dataLoading.fileReaders.ReutersArticleReader;
 import dataOperations.preprocessing.FullPreprocessor;
-import runner.ExtractingFeature;
 import utils.ExtractionMethod;
 
 import java.util.List;
@@ -15,11 +14,7 @@ import java.util.Map;
 
 public class App {
     public static void main(String[] args) {
-//        ReutersArticleReader reader = new ReutersArticleReader();
-//        DataLoader<Article> loader = new DataLoader<>();
-//        Preprocessor preprocessor = new Preprocessor();
 //
-//        List<Article> articles = loader.loadObjects(Config.learningSetPath, reader);
 //
 //        List<IFeatureExtractor> subExtractors = new ArrayList<>();
 //        subExtractors.add(new SentimentExtractor());
@@ -31,17 +26,14 @@ public class App {
         IPreprocessor<String> preprocessor = new FullPreprocessor();
         ReutersArticleReader reader = new ReutersArticleReader(preprocessor);
 
-        List<Article> articles = loader.loadObjects(Config.learningSetPath, reader);
+        List<Article> testSetArticles = loader.loadObjects(Config.learningSetPath, reader);
 
-        Map<ExtractionMethod, Map<String, List<String>>> keyWords = KeyWordExtractor.extractTopN(articles, 10);
+        Map<ExtractionMethod, Map<String, List<String>>> keyWords = KeyWordExtractor.extractTopN(testSetArticles, 10);
         for (ExtractionMethod label : keyWords.keySet()) {
             System.out.println(label);
             System.out.println(keyWords.get(label));
         }
 
-
-//
-//
 //        List<TextStatistics> s1 = new ArrayList<>();
 //        for (Article a : articles) {
 //            if (a.getLabel().equals("usa")) {

@@ -10,6 +10,12 @@ public class FeatureVector {
         this.label = label;
     }
 
+    public List<String> getFeatureNames() {
+        List<String> featureNames = new ArrayList<>();
+        featureNames.sort(String::compareTo);
+        return featureNames;
+    }
+
     public List<Feature> getFeatures() {
         return features;
     }
