@@ -16,6 +16,12 @@ public class FeatureVector {
         return featureNames;
     }
 
+    public void updateValues(List<Double> maxAbsValues) {
+        for (int i = 0; i < features.size(); i++) {
+            features.get(i).divideValue(maxAbsValues.get(i));
+        }
+    }
+
     public List<Feature> getFeatures() {
         return features;
     }
@@ -29,7 +35,6 @@ public class FeatureVector {
     }
 
     public List<Double> toList() {
-        features.sort(Comparator.comparing(Feature::getName));
         List<Double> featureValues = new ArrayList<>();
         for (Feature f : features) {
             featureValues.add(f.getValue());

@@ -1,5 +1,7 @@
 package metrics;
 
-public interface IMetric {
+import dataOperations.FeatureVector;
 
+public interface IMetric {
+    Double measure(FeatureVector v1, FeatureVector v2);
 }

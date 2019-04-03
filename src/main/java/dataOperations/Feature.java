@@ -17,6 +17,10 @@ public class Feature {
         return name;
     }
 
+    public void divideValue(double divisor) {
+        value /= divisor;
+    }
+
     @Override
     public String toString() {
         return "{" + name + " : " + value + "}";
