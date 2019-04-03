@@ -16,15 +16,23 @@ public class Runner {
     private List<Configurable> operations;
     private RunnerConfig runnerConfig;
     private List<List<Article>> articlesList;
+    private List<List<Article>> articlesListTest;
+    private List<List<Article>> articlesListTrain;
     private List<List<Feature>> featuresLists;
 
     public Runner() {
         runnerConfig = new RunnerConfig();
         articlesList = new ArrayList<>();
+        articlesListTest = new ArrayList<>();
+        articlesListTrain = new ArrayList<>();
         featuresLists = new ArrayList<>();
         operations = new ArrayList<>();
-        operations.add(new ExtractingDataSets(1, articlesList));
+
+
+        operations.add(new ExtractingDataSets(1, articlesList, articlesListTest, articlesListTrain));
         operations.add(new ExtractingFeatures(articlesList, 0, featuresLists));
+
+
         System.out.println(operations.get(1).range);
     }
 
