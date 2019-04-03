@@ -1,6 +1,7 @@
 package core;
 
 
+import dataOperations.Feature;
 import dataOperations.FeatureVector;
 import metrics.IMetric;
 
@@ -37,7 +38,9 @@ public class Knn {
 
     public String evaluateAndAddToDataset(FeatureVector featureVector) {
         String result = evaluate(featureVector);
-        dataset.addFeatureVector(featureVector);
+        FeatureVector copiedVector = new FeatureVector(result);
+        copiedVector.addFeatures(featureVector.getFeatures());
+        dataset.addFeatureVector(copiedVector);
         return result;
     }
 
