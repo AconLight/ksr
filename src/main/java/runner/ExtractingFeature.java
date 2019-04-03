@@ -12,9 +12,9 @@ public class ExtractingFeature extends Configurable {
     private List<List<Article>> articlesList;
     private int articleId;
 
-    public List<List<Feature>> featuresList;
+    public List<Feature> featuresList;
 
-    public ExtractingFeature(IFeatureExtractor featureExtractor, List<List<Article>> articlesList, int articleId, List<List<Feature>> featuresList) {
+    public ExtractingFeature(IFeatureExtractor featureExtractor, List<List<Article>> articlesList, int articleId, List<Feature> featuresList) {
         this.articleId = articleId;
         this.featureExtractor = featureExtractor;
         this.articlesList = articlesList;
@@ -26,7 +26,7 @@ public class ExtractingFeature extends Configurable {
         featureExtractor.setVariant(i);
         System.out.println("performing feature extraction variant: " + i);
         for (Article article: articlesList.get(articleId)) {
-            // featuresList.add(featureExtractor.extract(article));
+            featuresList.addAll(featureExtractor.extract(article));
         }
         System.out.println("performed feature extraction variant: " + i);
 

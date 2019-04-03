@@ -21,7 +21,7 @@ public class Runner {
     private List<List<Article>> articlesListTest;
     private List<List<Article>> articlesListTrain;
     private List<List<Feature>> featuresLists;
-    List<Map<ExtractionMethod, Map<String, List<String>>>> keyWordsList;
+
 
     public Runner() {
         runnerConfig = new RunnerConfig();
@@ -29,13 +29,13 @@ public class Runner {
         articlesListTest = new ArrayList<>();
         articlesListTrain = new ArrayList<>();
         featuresLists = new ArrayList<>();
-        keyWordsList = new ArrayList<>();
+        RunnerConfig.keyWordsList = new ArrayList<>();
         operations = new ArrayList<>();
 
 
         operations.add(new ExtractingDataSets(1, articlesList, articlesListTest, articlesListTrain));
-        operations.add(new ExtractingKeyWords(3, articlesListTrain, keyWordsList));
-        operations.add(new ExtractingFeatures(articlesList, 0, featuresLists));
+        operations.add(new ExtractingKeyWords(3, articlesListTrain, RunnerConfig.keyWordsList));
+        operations.add(new ExtractingFeatures(articlesList, 0, featuresLists, RunnerConfig.keyWordsList));
 
 
         System.out.println(operations.get(1).range);

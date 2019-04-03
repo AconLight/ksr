@@ -37,6 +37,11 @@ public class SentimentExtractor implements IFeatureExtractor<Article> {
         return features;
     }
 
+    @Override
+    public void setData(ExtractorData data) {
+        // do nothing, no use
+    }
+
     private Double averageSentiment(List<Double> sentiments) {
         double sum = 0;
         for (Double s : sentiments) {
