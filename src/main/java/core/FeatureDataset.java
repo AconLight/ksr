@@ -5,36 +5,43 @@ import dataOperations.FeatureVector;
 import java.util.ArrayList;
 import java.util.List;
 
-// wg mnie to powinno wyglądać tak:
-//        - znajdujemy w learning secie max i min wartość cechy C
-//        - przeskalowujemy każdy wektor obecnie istniejący i w przyszłości dodawany/sprawdzany w taki sposób, że:
-//
-//        najpierw zapisujemy x_max_abs = max(abs(x))
-//
-//        a potem każdy nowy x = x / x_max_abs
+class FeatureDataset {
+    private int featureAmount;
 
-
-public class FeatureDataset {
-    private List<List<Double>> vectors = new ArrayList<>();
-    List<Double> maxAbsPerFeature = new ArrayList<>();
-
-    FeatureDataset(List<FeatureVector> featureVectors) {
-        for (FeatureVector fv : featureVectors) {
-            vectors.add(fv.toList());
-        }
-        setRescalingParam();
+    public List<FeatureVector> getFeatureVectors() {
+        return featureVectors;
     }
 
-    private void setRescalingParam() {
-        int featureCount = vectors.get(0).size();
+    private List<FeatureVector> featureVectors;
+    private List<Double> featureMaxAbs;
 
-        for (int i = 0; i < featureCount; i++) {
-            double maxAbs = Math.abs(vectors.get(0).get(i));
 
-            for (List<Double> v : vectors) {
-                if (maxAbs < Math.abs(v.get(i))) maxAbs = v.get(i);
-            }
-            maxAbsPerFeature.add(maxAbs);
+    FeatureDataset(List<FeatureVector> featureVectors) {
+        featureAmount = featureVectors.get(0).getFeatures().size();
+        featureMaxAbs = featureMaxAbs(featureVectors);
+
+        for (FeatureVector fv : featureVectors) {
+            fv.updateValues(featureMaxAbs);
         }
+
+        this.featureVectors = featureVectors;
+    }
+
+    public void addFeatureVector(FeatureVector fv) {
+        fv.updateValues(featureMaxAbs);
+        featureVectors.add(fv);
+    }
+
+    private List<Double> featureMaxAbs(List<FeatureVector> featureVectors) {
+        List<Double> featureMaxAbs = new ArrayList<>();
+        for (int i = 0; i < featureAmount; i++) {
+            double maxAbs = 0;
+            for (FeatureVector fv : featureVectors) {
+                double tmpMaxAbs = Math.abs(fv.getFeatures().get(i).getValue());
+                if (maxAbs < tmpMaxAbs) maxAbs = tmpMaxAbs;
+            }
+            featureMaxAbs.add(maxAbs);
+        }
+        return featureMaxAbs;
     }
 }
