@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
+import static config.Config.placesLabels;
+
 public class ReutersArticleReader implements IFileReader<Article> {
     private IPreprocessor<String> preprocessor;
 
@@ -28,7 +30,6 @@ public class ReutersArticleReader implements IFileReader<Article> {
     }
 
     private String[] marks = {"PLACES", "TITLE", "BODY"};
-    private String[] acceptedPlaces = {"west-germany", "usa", "france", "uk", "canada", "japan"};
     private String[] marksToRemove = {"D"};
     private String[] stringsToRemove = {"REUTER", "&#3;"};
 
@@ -146,7 +147,7 @@ public class ReutersArticleReader implements IFileReader<Article> {
     }
 
     private boolean placeIsAccepted(String checkedPlace) {
-        for (String place : acceptedPlaces) {
+        for (String place : placesLabels) {
             if (Objects.equals(place, checkedPlace)) {
                 return true;
             }

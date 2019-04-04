@@ -44,6 +44,22 @@ public class DataLoader<T extends ClassifiedObject> {
 
 
         return featureVectors;
+    }
 
+    public List<T> loadNObjects(Path directory, IFileReader<T> reader, int n, List<String> legalLabels) {
+        List<T> allFeatureVectors = loadObjects(directory, reader);
+        List<T> filteredFeatureVectors = new ArrayList<>();
+
+        for (String label : legalLabels) {
+            int i = 0;
+            for (T v : allFeatureVectors) {
+                if (v.getLabel().equals(label)) {
+                    filteredFeatureVectors.add(v);
+                    i++;
+                    if (i == n) break;
+                }
+            }
+        }
+        return filteredFeatureVectors;
     }
 }

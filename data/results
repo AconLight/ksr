@@ -1,0 +1,6 @@
+{ngram:1, initSizePerClass:35, k:3, numberOfKeywords:3, extractionMethod:OVERALL_WORD_OCCURRENCES, precision:0.871}
+{ngram:2, initSizePerClass:35, k:3, numberOfKeywords:3, extractionMethod:OVERALL_WORD_OCCURRENCES, precision:0.871}
+{ngram:3, initSizePerClass:35, k:3, numberOfKeywords:3, extractionMethod:OVERALL_WORD_OCCURRENCES, precision:0.823}
+{ngram:4, initSizePerClass:35, k:3, numberOfKeywords:3, extractionMethod:OVERALL_WORD_OCCURRENCES, precision:0.871}
+
+{ngram:1, initSizePerClass:35, k:3, numberOfKeywords:3, extractionMethod:TFIDF, precision:0.8714285714285714}
