@@ -8,7 +8,7 @@ public class GeneralizedNGramWithLimits implements IWordSimilarity {
 
     private int lowerLimit, upperLimit;
 
-    GeneralizedNGramWithLimits(int lowerLimit, int upperLimit) {
+    public GeneralizedNGramWithLimits(int lowerLimit, int upperLimit) {
         assert lowerLimit <= upperLimit;
         this.lowerLimit = lowerLimit;
         this.upperLimit = upperLimit;

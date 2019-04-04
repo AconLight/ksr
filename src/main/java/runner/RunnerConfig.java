@@ -1,6 +1,9 @@
 package runner;
 
 import utils.ExtractionMethod;
+import word.similarity.GeneralizedNGramWithLimits;
+import word.similarity.IWordSimilarity;
+import word.similarity.NGram;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,4 +17,10 @@ public class RunnerConfig {
     };
 
     public static List<Map<ExtractionMethod, Map<String, List<String>>>> keyWordsList;
+
+    public static IWordSimilarity[] wordSimilarities = {
+            new NGram(1),
+            new GeneralizedNGramWithLimits(1, 2),
+            new GeneralizedNGramWithLimits(2, 2)
+    };
 }

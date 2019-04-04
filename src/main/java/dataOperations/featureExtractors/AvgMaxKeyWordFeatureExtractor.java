@@ -2,6 +2,7 @@ package dataOperations.featureExtractors;
 
 import classifiedObjects.Article;
 import dataOperations.Feature;
+import runner.RunnerConfig;
 import utils.ExtractionMethod;
 import word.similarity.IWordSimilarity;
 
@@ -19,7 +20,9 @@ public class AvgMaxKeyWordFeatureExtractor implements IFeatureExtractor<Article>
 
     @Override
     public void setVariant(int i) {
-
+        int j = i/ RunnerConfig.wordSimilarities.length;
+        similarityMethod = RunnerConfig.wordSimilarities[i];
+        extractionMethod = ExtractionMethod.values()[j];
     }
 
     @Override
@@ -60,8 +63,6 @@ public class AvgMaxKeyWordFeatureExtractor implements IFeatureExtractor<Article>
     @Override
     public void setData(ExtractorData data) {
         this.keyWords = data.keyWords;
-        this.similarityMethod = data.similarity;
-        this.extractionMethod = data.extractionMethod;
     }
 
 }

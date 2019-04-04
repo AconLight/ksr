@@ -38,7 +38,6 @@ public class ExtractingFeatures extends Configurable {
             for (IFeatureExtractor featureExtractor : RunnerConfig.featureExtractorsConfig[i].extractors) {
                 ExtractorData data = new ExtractorData();
                 data.keyWords = keyWordsList.get(articlesId);
-                // TODO
                 featureExtractor.setData(data);
                 temp.add(new ExtractingFeature(featureExtractor, articlesList, articlesId, featuresList.get(featuresList.size()-1)));
             }
