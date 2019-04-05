@@ -1,5 +1,6 @@
 package runner;
 
+import dataOperations.featureExtractors.AvgMaxKeyWordFeatureExtractor;
 import dataOperations.featureExtractors.IFeatureExtractor;
 import dataOperations.featureExtractors.SentimentExtractor;
 
@@ -18,11 +19,10 @@ public class FeatureExtractorsConfig {
 
     public static FeatureExtractorsConfig fec1() {
         FeatureExtractorsConfig fec = new FeatureExtractorsConfig();
-        fec.extractors.add(new SentimentExtractor());
-        fec.extractors.add(new SentimentExtractor()); // doubling for testing purposes
-        fec.variantsList.add(Arrays.asList(0, 0));
-        fec.variantsList.add(Arrays.asList(1, 2));
-        fec.variantsList.add(Arrays.asList(0, 4));
+        fec.extractors.add(new AvgMaxKeyWordFeatureExtractor());
+        fec.variantsList.add(Arrays.asList(0));
+        fec.variantsList.add(Arrays.asList(1));
+        fec.variantsList.add(Arrays.asList(2));
         return fec;
     }
 

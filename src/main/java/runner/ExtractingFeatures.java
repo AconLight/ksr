@@ -2,6 +2,7 @@ package runner;
 
 import classifiedObjects.Article;
 import dataOperations.Feature;
+import dataOperations.FeatureVector;
 import dataOperations.featureExtractors.ExtractorData;
 import dataOperations.featureExtractors.IFeatureExtractor;
 import utils.ExtractionMethod;
@@ -21,7 +22,7 @@ public class ExtractingFeatures extends Configurable {
 
     private int currentI;
 
-    public ExtractingFeatures(List<List<Article>> articlesList, int articlesId, List<List<Feature>> featuresList, List<Map<ExtractionMethod, Map<String, List<String>>>> keyWordsList) {
+    public ExtractingFeatures(List<List<Article>> articlesList, int articlesId, List<List<FeatureVector>> featuresList, List<Map<ExtractionMethod, Map<String, List<String>>>> keyWordsList) {
         this.keyWordsList = keyWordsList;
         currentI = 0;
         range = 1;
@@ -36,10 +37,7 @@ public class ExtractingFeatures extends Configurable {
             extractingFeaturesList.add(temp = new ArrayList<>());
             featuresList.add(new ArrayList<>());
             for (IFeatureExtractor featureExtractor : RunnerConfig.featureExtractorsConfig[i].extractors) {
-                ExtractorData data = new ExtractorData();
-                data.keyWords = keyWordsList.get(articlesId);
-                featureExtractor.setData(data);
-                temp.add(new ExtractingFeature(featureExtractor, articlesList, articlesId, featuresList.get(featuresList.size()-1)));
+                temp.add(new ExtractingFeature(keyWordsList, featureExtractor, articlesList, articlesId, articlesId, featuresList.get(featuresList.size()-1)));
             }
             for (List<Integer> variant : RunnerConfig.featureExtractorsConfig[i].variantsList) {
                 temp2.add(variant);

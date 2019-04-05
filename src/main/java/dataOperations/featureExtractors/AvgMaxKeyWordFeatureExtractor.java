@@ -21,7 +21,7 @@ public class AvgMaxKeyWordFeatureExtractor implements IFeatureExtractor<Article>
     @Override
     public void setVariant(int i) {
         int j = i/ RunnerConfig.wordSimilarities.length;
-        similarityMethod = RunnerConfig.wordSimilarities[i];
+        similarityMethod = RunnerConfig.wordSimilarities[i %  RunnerConfig.wordSimilarities.length];
         extractionMethod = ExtractionMethod.values()[j];
     }
 

@@ -10,6 +10,10 @@ public class FeatureVector {
         this.label = label;
     }
 
+    public FeatureVector() {
+        this.label = "not specified yet";
+    }
+
     public List<String> getFeatureNames() {
         List<String> featureNames = new ArrayList<>();
         featureNames.sort(String::compareTo);
@@ -42,7 +46,7 @@ public class FeatureVector {
         return featureValues;
     }
 
-    private String label;
+    public String label;
 
     private List<Feature> features = new ArrayList<>();
 
