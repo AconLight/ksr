@@ -22,8 +22,8 @@ public class ExtractingFeatures extends Configurable {
 
     private int currentI;
 
-    public ExtractingFeatures(List<List<Article>> articlesList, int articlesId, List<List<FeatureVector>> featuresList, List<Map<ExtractionMethod, Map<String, List<String>>>> keyWordsList) {
-        this.keyWordsList = keyWordsList;
+    public ExtractingFeatures(List<List<Article>> articlesList, int articlesId, List<List<FeatureVector>> featuresList, KeyWordsData keyWordsData) {
+        this.keyWordsList = keyWordsData.keyWordsList;
         currentI = 0;
         range = 1;
         featureCombinations = new ArrayList<>();
@@ -37,7 +37,7 @@ public class ExtractingFeatures extends Configurable {
             extractingFeaturesList.add(temp = new ArrayList<>());
             featuresList.add(new ArrayList<>());
             for (IFeatureExtractor featureExtractor : RunnerConfig.featureExtractorsConfig[i].extractors) {
-                temp.add(new ExtractingFeature(keyWordsList, featureExtractor, articlesList, articlesId, articlesId, featuresList.get(featuresList.size()-1)));
+                temp.add(new ExtractingFeature(keyWordsData, featureExtractor, articlesList, articlesId, articlesId, featuresList.get(featuresList.size()-1)));
             }
             for (List<Integer> variant : RunnerConfig.featureExtractorsConfig[i].variantsList) {
                 temp2.add(variant);

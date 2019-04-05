@@ -14,15 +14,25 @@ import static config.Config.placesLabels;
 
 public class AvgMaxKeyWordFeatureExtractor implements IFeatureExtractor<Article> {
     private Map<ExtractionMethod, Map<String, List<String>>> keyWords;
+
     private IWordSimilarity similarityMethod;
     private ExtractionMethod extractionMethod;
 
+    @Override
+    public IWordSimilarity similarityMethod(int i) {
+        return RunnerConfig.wordSimilarities[i %  RunnerConfig.wordSimilarities.length];
+    }
+
+    @Override
+    public ExtractionMethod extractionMethod(int i) {
+        int j = i/ RunnerConfig.wordSimilarities.length;
+        return ExtractionMethod.values()[j];
+    }
 
     @Override
     public void setVariant(int i) {
-        int j = i/ RunnerConfig.wordSimilarities.length;
-        similarityMethod = RunnerConfig.wordSimilarities[i %  RunnerConfig.wordSimilarities.length];
-        extractionMethod = ExtractionMethod.values()[j];
+        similarityMethod = similarityMethod(i);
+        extractionMethod = extractionMethod(i);
     }
 
     @Override
@@ -64,5 +74,6 @@ public class AvgMaxKeyWordFeatureExtractor implements IFeatureExtractor<Article>
     public void setData(ExtractorData data) {
         this.keyWords = data.keyWords;
     }
+
 
 }

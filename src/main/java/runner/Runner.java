@@ -9,10 +9,12 @@ import dataOperations.Feature;
 import dataOperations.FeatureVector;
 import dataOperations.featureExtractors.MainFeatureExtractor;
 import metrics.IMetric;
+import utils.ExtractionMethod;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class Runner {
     private List<Configurable> operations;
@@ -23,7 +25,8 @@ public class Runner {
     private List<List<FeatureVector>> featuresLists;
     private List<List<Knn>> knnList;
     private List<Result> results;
-
+    private ArrayList<String> dataSets;
+    private KeyWordsData keyWordsData = new KeyWordsData();
 
     public Runner() {
         runnerConfig = new RunnerConfig();
@@ -31,15 +34,16 @@ public class Runner {
         articlesListTest = new ArrayList<>();
         articlesListTrain = new ArrayList<>();
         featuresLists = new ArrayList<>();
-        RunnerConfig.keyWordsList = new ArrayList<>();
+        keyWordsData.keyWordsList = new ArrayList<>();
         operations = new ArrayList<>();
         knnList = new ArrayList<>();
+        results = new ArrayList<>();
+        dataSets = new ArrayList<>();
 
-
-        operations.add(new ExtractingDataSets(1, articlesList, articlesListTest, articlesListTrain));
-        operations.add(new ExtractingKeyWords(1, articlesListTrain, RunnerConfig.keyWordsList));
-        operations.add(new ExtractingFeatures(articlesList, 0, featuresLists, RunnerConfig.keyWordsList));
-        operations.add(new KNNRunner(knnList, featuresLists, Arrays.asList(RunnerConfig.metrics)));
+        operations.add(new ExtractingDataSets(dataSets, 1, articlesList, articlesListTest, articlesListTrain));
+        operations.add(new ExtractingKeyWords(1, articlesListTrain, keyWordsData));
+        operations.add(new ExtractingFeatures(articlesListTrain, 0, featuresLists, keyWordsData));
+        operations.add(new KNNRunner(results, knnList, featuresLists, Arrays.asList(RunnerConfig.metrics)));
 
     }
 
@@ -47,15 +51,10 @@ public class Runner {
         for (Configurable op: operations) {
             op.performAll();
         }
-        int i = 0;
-        int j = 0;
-        for (List<Knn> knns: knnList) {
-            j = 0;
-            for (Knn knn: knns) {
 
-                j++;
-            }
-            i++;
+        System.out.println("results:");
+        for (Result r: results) {
+            System.out.println(r.toString());
         }
 
     }

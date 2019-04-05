@@ -7,4 +7,17 @@ public class Result {
     public String extractorsWithVariants;
     public String wordSimilarity;
     public String knn;
+    public String originalLabel;
+
+    public String toString() {
+        return "dataSet\n" + dataSets + "\n" +
+                "preprocessing\n" + preprocessing + "\n" +
+                "keyWords\n" + keyWords + "\n" +
+                "extractorsWithVariants\n" + extractorsWithVariants + "\n" +
+                "wordSimilarity\n" + wordSimilarity + "\n" +
+                "knn\n" + knn + "\n" +
+                "originalLabel\n" + originalLabel + "\n";
+
+    }
 }
+

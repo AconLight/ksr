@@ -17,16 +17,18 @@ public class ExtractingFeature extends Configurable {
     private List<List<Article>> articlesList;
     private int articleId, articlesId;
     private List<Map<ExtractionMethod, Map<String, List<String>>>> keyWordsList;
+    private KeyWordsData keyWordsData;
 
     public List<FeatureVector> featuresList;
 
-    public ExtractingFeature(List<Map<ExtractionMethod, Map<String, List<String>>>> keyWordsList, IFeatureExtractor featureExtractor, List<List<Article>> articlesList, int articleId, int articlesId, List<FeatureVector> featuresList) {
+    public ExtractingFeature(KeyWordsData keyWordsData, IFeatureExtractor featureExtractor, List<List<Article>> articlesList, int articleId, int articlesId, List<FeatureVector> featuresList) {
         this.articleId = articleId;
         this.articlesId = articlesId;
         this.featureExtractor = featureExtractor;
         this.articlesList = articlesList;
         this.featuresList = featuresList;
-        this.keyWordsList = keyWordsList;
+        this.keyWordsList = keyWordsData.keyWordsList;
+        this.keyWordsData = keyWordsData;
     }
 
     @Override
@@ -41,7 +43,13 @@ public class ExtractingFeature extends Configurable {
         int id = 0;
         if (featuresList.isEmpty()) {
             for (Article a : articlesList.get(articleId)) {
-                featuresList.add(new FeatureVector(a.getLabel()));
+                FeatureVector fv;
+                featuresList.add(fv = new FeatureVector(a.getLabel()));
+                fv.origin = keyWordsData.origin;
+                if (featureExtractor.extractionMethod(i) != null)
+                    fv.keyWordsMethod = featureExtractor.extractionMethod(i).name();
+                if (featureExtractor.similarityMethod(i) != null)
+                    fv.similarity = featureExtractor.similarityMethod(i).getClass().getName();
             }
         }
         for (Article a : articlesList.get(articleId)) {

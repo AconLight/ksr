@@ -10,6 +10,10 @@ public class FeatureVector {
         this.label = label;
     }
 
+    public String origin;
+    public String keyWordsMethod;
+    public String similarity;
+
     public FeatureVector() {
         this.label = "not specified yet";
     }

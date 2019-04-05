@@ -14,7 +14,9 @@ import java.util.List;
 
 import dataOperations.Pipelines;
 import org.ejml.simple.SimpleMatrix;
+import utils.ExtractionMethod;
 import utils.Utils;
+import word.similarity.IWordSimilarity;
 
 
 public class SentimentExtractor implements IFeatureExtractor<Article> {
@@ -40,6 +42,16 @@ public class SentimentExtractor implements IFeatureExtractor<Article> {
     @Override
     public void setData(ExtractorData data) {
         // do nothing, no use
+    }
+
+    @Override
+    public IWordSimilarity similarityMethod(int i) {
+        return null;
+    }
+
+    @Override
+    public ExtractionMethod extractionMethod(int i) {
+        return null;
     }
 
     private Double averageSentiment(List<Double> sentiments) {

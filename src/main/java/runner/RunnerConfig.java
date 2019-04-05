@@ -23,8 +23,6 @@ public class RunnerConfig {
 
     public static IWordSimilarity[] wordSimilarities = {
             new NGram(1),
-            new GeneralizedNGramWithLimits(1, 2),
-            new GeneralizedNGramWithLimits(2, 2)
     };
 
     public static IMetric[] metrics = {
@@ -33,5 +31,5 @@ public class RunnerConfig {
             new ChebyshevMetric()
     };
 
-    public static int[] k = { 1, 2, 5, 8};
+    public static int[] k = { 3 };
 }

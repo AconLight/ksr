@@ -15,11 +15,15 @@ public class KNNRunner extends Configurable {
 
     private List<IMetric> metrics;
 
-    public KNNRunner(List<List<Knn>> knn, List<List<FeatureVector>> initiatingVectors, List<IMetric> metrics) {
+    private List<Result> resultsList;
+
+    public KNNRunner(List<Result> resultsList, List<List<Knn>> knn, List<List<FeatureVector>> initiatingVectors, List<IMetric> metrics) {
         super(RunnerConfig.k.length);
         this.initiatingVectors = initiatingVectors;
         this.knn = knn;
         this.metrics = metrics;
+        this.resultsList = resultsList;
+        this.range = initiatingVectors.size();
     }
 
     @Override
@@ -37,7 +41,15 @@ public class KNNRunner extends Configurable {
                 }
                 knns.add(myKnn = new Knn(RunnerConfig.k[i], vectorsNotUsa, metric));
                 for (FeatureVector vector : vectors) {
-                    myKnn.evaluateAndAddToDataset(vector);
+                    String res = myKnn.evaluateAndAddToDataset(vector);
+                    Result r = new Result();
+                    r.dataSets = vector.origin;
+                    r.keyWords = vector.keyWordsMethod;
+                    r.wordSimilarity = vector.similarity;
+                    r.extractorsWithVariants = vector.toString();
+                    r.originalLabel = vector.label;
+                    r.knn = res;
+                    resultsList.add(r);
                 }
                 //System.out.println("knn finished");
             }

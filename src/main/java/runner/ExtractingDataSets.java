@@ -22,11 +22,14 @@ public class ExtractingDataSets extends Configurable {
 
     private List<List<Article>> articlesListTest;
 
-    public ExtractingDataSets(int range, List<List<Article>> articlesList, List<List<Article>> articlesListTest, List<List<Article>> articlesListTrain) {
+    ArrayList<String> dataSets;
+
+    public ExtractingDataSets(ArrayList<String> dataSets, int range, List<List<Article>> articlesList, List<List<Article>> articlesListTest, List<List<Article>> articlesListTrain) {
         super(range);
         this.articlesList = articlesList;
         this.articlesListTest = articlesListTest;
         this.articlesListTrain = articlesListTrain;
+        this.dataSets = dataSets;
     }
 
     @Override
@@ -42,6 +45,17 @@ public class ExtractingDataSets extends Configurable {
         articlesListTest.add(temp.subList(trainI, lastId));
         articlesListTrain.add(temp.subList(0, trainI-1));
 
-        System.out.println("dataSet " + articlesListTrain.get(0).size() + ", " + articlesListTest.get(0).size());
+        for (List<Article> articles: articlesListTrain) {
+            for (Article article: articles) {
+                article.origin = "train dataSet " + i + " - train: " + articlesListTrain.get(0).size() + ", test: " + articlesListTest.get(0).size();
+            }
+        }
+
+        for (List<Article> articles: articlesListTest) {
+            for (Article article: articles) {
+                article.origin = "test dataSet " + i + " - train: " + articlesListTrain.get(0).size() + ", test: " + articlesListTest.get(0).size();
+            }
+        }
+        dataSets.add("dataSet " + i + " - train: " + articlesListTrain.get(0).size() + ", test: " + articlesListTest.get(0).size());
     }
 }

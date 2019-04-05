@@ -12,6 +12,8 @@ public class Article extends ClassifiedObject {
     private String title;
     private List<String> textWords;
 
+    public String origin;
+
     public Article(HashMap<String, String> data, String label, IPreprocessor<String> preprocessor) {
         this.label = label;
         text = preprocessor.process(data.get("BODY"));
