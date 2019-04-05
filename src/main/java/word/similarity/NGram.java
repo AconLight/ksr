@@ -11,10 +11,6 @@ public class NGram implements IWordSimilarity {
     }
 
     public Double measure(String s1, String s2) {
-        return g(s1, s2) / (s1.length() + s2.length() + 1);
-    }
-
-    public double g(String s1, String s2) {
         String longer, shorter;
         if (s1.length() > s2.length()) {
             longer = s1;
@@ -24,7 +20,15 @@ public class NGram implements IWordSimilarity {
             shorter = s1;
         }
 
+        if (n > longer.length()) return 0.;
+
         Set<String> possibleSubstrings = possibleSubstrings(longer);
+        double g = commonSubstrings(shorter, possibleSubstrings);
+        double d = possibleSubstrings.size();
+        return g / d;
+    }
+
+    public double commonSubstrings(String shorter, Set<String> possibleSubstrings) {
         double sum = 0;
 
         for (int i = 0; i < shorter.length() - n + 1; i++) {
@@ -35,7 +39,7 @@ public class NGram implements IWordSimilarity {
         return sum;
     }
 
-    private Set<String> possibleSubstrings(String word) {
+    public Set<String> possibleSubstrings(String word) {
         Set<String> substrings = new HashSet<>();
         for (int i = 0; i < word.length() - n + 1; i++) {
             substrings.add(word.substring(i, i + n));

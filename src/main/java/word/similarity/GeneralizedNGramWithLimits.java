@@ -2,16 +2,13 @@ package word.similarity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class GeneralizedNGramWithLimits implements IWordSimilarity {
     private List<NGram> ngrams = new ArrayList<>();
 
-    private int lowerLimit, upperLimit;
-
     public GeneralizedNGramWithLimits(int lowerLimit, int upperLimit) {
         assert lowerLimit <= upperLimit;
-        this.lowerLimit = lowerLimit;
-        this.upperLimit = upperLimit;
         for (int i = lowerLimit; i <= upperLimit; i++) {
             ngrams.add(new NGram(i));
         }
@@ -19,23 +16,26 @@ public class GeneralizedNGramWithLimits implements IWordSimilarity {
 
     @Override
     public Double measure(String s1, String s2) {
-        double sum = 0;
+        double commonSubparts = 0;
+        double possibleSubparts = 0;
+
+        String longer, shorter;
+        if (s1.length() > s2.length()) {
+            longer = s1;
+            shorter = s2;
+        } else {
+            longer = s2;
+            shorter = s1;
+        }
+
+
         for (NGram ngram : ngrams) {
-            sum += ngram.g(s1, s2);
+            Set<String> possibleSubstrings = ngram.possibleSubstrings(longer);
+            commonSubparts += ngram.commonSubstrings(shorter, possibleSubstrings);
+            possibleSubparts += possibleSubstrings.size();
         }
-        int denominator = possibleCombinationsCount(s1, s2, lowerLimit, upperLimit);
-        if (denominator == 0) {
-            return 0.;
-        }
-        return sum / denominator;
+
+        return commonSubparts / possibleSubparts;
     }
 
-    private int possibleCombinationsCount(String s1, String s2, int lowerLimit, int upperLimit) {
-        int N = Math.max(s1.length(), s2.length());
-        int denominator = ((N - lowerLimit + 1) * (N - lowerLimit + 2) - (N - upperLimit + 1) * (N - upperLimit));
-        if (denominator == 0) {
-            return 0;
-        }
-        return 2 / denominator;
-    }
 }
