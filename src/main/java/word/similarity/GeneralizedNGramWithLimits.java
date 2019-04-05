@@ -23,11 +23,19 @@ public class GeneralizedNGramWithLimits implements IWordSimilarity {
         for (NGram ngram : ngrams) {
             sum += ngram.g(s1, s2);
         }
-        return sum / possibleCombinationsCount(s1, s2, lowerLimit, upperLimit);
+        int denominator = possibleCombinationsCount(s1, s2, lowerLimit, upperLimit);
+        if (denominator == 0) {
+            return 0.;
+        }
+        return sum / denominator;
     }
 
     private int possibleCombinationsCount(String s1, String s2, int lowerLimit, int upperLimit) {
         int N = Math.max(s1.length(), s2.length());
-        return 2 / ((N - lowerLimit + 1) * (N - lowerLimit + 2) - (N - upperLimit + 1) * (N - upperLimit));
+        int denominator = ((N - lowerLimit + 1) * (N - lowerLimit + 2) - (N - upperLimit + 1) * (N - upperLimit));
+        if (denominator == 0) {
+            return 0;
+        }
+        return 2 / denominator;
     }
 }
