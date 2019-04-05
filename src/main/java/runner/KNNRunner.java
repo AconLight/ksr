@@ -27,7 +27,7 @@ public class KNNRunner extends Configurable {
         int n = 0;
         for (List<FeatureVector> vectors: initiatingVectors) {
             for (IMetric metric : metrics) {
-                System.out.println("knn start");
+                //System.out.println("knn start");
                 Knn myKnn;
                 List<FeatureVector> vectorsNotUsa = new ArrayList<>();
                 for (FeatureVector v :vectors){
@@ -35,9 +35,9 @@ public class KNNRunner extends Configurable {
                 }
                 knn.add(myKnn = new Knn(RunnerConfig.k[i], vectorsNotUsa, metric));
                 for (FeatureVector vector : vectors) {
-                    System.out.println(myKnn.evaluate(vector));
+                    myKnn.evaluateAndAddToDataset(vector);
                 }
-                System.out.println("knn finished");
+                //System.out.println("knn finished");
             }
 
         }

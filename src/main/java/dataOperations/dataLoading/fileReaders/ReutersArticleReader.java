@@ -139,7 +139,7 @@ public class ReutersArticleReader implements IFileReader<Article> {
         List<Article> articles = new ArrayList<>();
         for (HashMap<String, String> articleData : dataList) {
             String label = articleData.get("PLACES").trim();
-            if (true || placeIsAccepted(label)) {
+            if (placeIsAccepted(label)) {
                 articles.add(new Article(articleData, label, this.preprocessor));
             }
         }
