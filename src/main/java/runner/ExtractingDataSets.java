@@ -35,7 +35,7 @@ public class ExtractingDataSets extends Configurable {
         IPreprocessor<String> preprocessor = new FullPreprocessor();
         ReutersArticleReader reader = new ReutersArticleReader(preprocessor);
         List<Article> temp;
-        Collections.shuffle(temp = loader.loadObjects(Config.learningSetPath, reader), new Random(i));
+        Collections.shuffle(temp = loader.loadObjects(Config.allSetPath, reader), new Random(i));
         articlesList.add(temp);
         int lastId = temp.size() - 1;
         int trainI = (int)(temp.size() * divide);

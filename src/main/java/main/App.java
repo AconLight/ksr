@@ -60,8 +60,8 @@ public class App {
             if (!confusionMatrix.containsKey(name)) {
                 confusionMatrix.put(name, 0);
             }
-
             confusionMatrix.put(name, confusionMatrix.get(name) + 1);
+
 
             if (result.equals(fv.getLabel())) sum++;
         }

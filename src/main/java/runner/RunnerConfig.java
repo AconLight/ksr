@@ -1,5 +1,9 @@
 package runner;
 
+import metrics.ChebyshevMetric;
+import metrics.EuclideanMetric;
+import metrics.IMetric;
+import metrics.ManhattanMetric;
 import utils.ExtractionMethod;
 import word.similarity.GeneralizedNGramWithLimits;
 import word.similarity.IWordSimilarity;
@@ -12,8 +16,7 @@ import java.util.Map;
 public class RunnerConfig {
     public static int dataSetsRange = 10;
     public static FeatureExtractorsConfig[] featureExtractorsConfig = {
-            FeatureExtractorsConfig.fec1(),
-            FeatureExtractorsConfig.fec2()
+            FeatureExtractorsConfig.fec1()
     };
 
     public static List<Map<ExtractionMethod, Map<String, List<String>>>> keyWordsList;
@@ -23,4 +26,12 @@ public class RunnerConfig {
             new GeneralizedNGramWithLimits(1, 2),
             new GeneralizedNGramWithLimits(2, 2)
     };
+
+    public static IMetric[] metrics = {
+            new ManhattanMetric(),
+            new EuclideanMetric(),
+            new ChebyshevMetric()
+    };
+
+    public static int[] k = { 1, 2, 5, 8};
 }
