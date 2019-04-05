@@ -21,7 +21,8 @@ public class Runner {
     private List<List<Article>> articlesListTest;
     private List<List<Article>> articlesListTrain;
     private List<List<FeatureVector>> featuresLists;
-    private List<Knn> knnList;
+    private List<List<Knn>> knnList;
+    private List<Result> results;
 
 
     public Runner() {
@@ -40,13 +41,23 @@ public class Runner {
         operations.add(new ExtractingFeatures(articlesList, 0, featuresLists, RunnerConfig.keyWordsList));
         operations.add(new KNNRunner(knnList, featuresLists, Arrays.asList(RunnerConfig.metrics)));
 
-        System.out.println(operations.get(1).range);
     }
 
     public void perform() {
         for (Configurable op: operations) {
             op.performAll();
         }
+        int i = 0;
+        int j = 0;
+        for (List<Knn> knns: knnList) {
+            j = 0;
+            for (Knn knn: knns) {
+
+                j++;
+            }
+            i++;
+        }
+
     }
 
 
