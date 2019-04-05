@@ -7,5 +7,5 @@ import java.util.Map;
 
 public class KeyWordsData {
     public List<Map<ExtractionMethod, Map<String, List<String>>>> keyWordsList;
-    String origin;
+    public List<String> origin;
 }

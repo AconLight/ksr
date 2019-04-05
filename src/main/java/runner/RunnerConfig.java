@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 public class RunnerConfig {
-    public static int dataSetsRange = 10;
+    public static int dataSetsRange = 2;
     public static FeatureExtractorsConfig[] featureExtractorsConfig = {
             FeatureExtractorsConfig.fec1()
     };
@@ -23,6 +23,7 @@ public class RunnerConfig {
 
     public static IWordSimilarity[] wordSimilarities = {
             new NGram(1),
+            new GeneralizedNGramWithLimits(1, 2)
     };
 
     public static IMetric[] metrics = {

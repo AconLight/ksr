@@ -24,6 +24,14 @@ public class FeatureVector {
         return featureNames;
     }
 
+    public String getFeatureNamesToString() {
+        String res = "";
+        for (Feature feature: features) {
+            res += feature.getName() + " ";
+        }
+        return res;
+    }
+
     public void updateValues(List<Double> maxAbsValues) {
         for (int i = 0; i < features.size(); i++) {
             features.get(i).divideValue(maxAbsValues.get(i));

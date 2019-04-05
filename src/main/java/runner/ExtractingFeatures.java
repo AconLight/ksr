@@ -20,29 +20,35 @@ public class ExtractingFeatures extends Configurable {
     private List<Integer> getI;
     private List<List<Integer>> getIVariant;
 
+    private List<List<Article>> articlesList;
+
     private int currentI;
 
-    public ExtractingFeatures(List<List<Article>> articlesList, int articlesId, List<List<FeatureVector>> featuresList, KeyWordsData keyWordsData) {
+    public ExtractingFeatures(List<List<Article>> articlesList, List<List<List<FeatureVector>>> featuresList, KeyWordsData keyWordsData) {
         this.keyWordsList = keyWordsData.keyWordsList;
+        this.articlesList = articlesList;
         currentI = 0;
         range = 1;
         featureCombinations = new ArrayList<>();
         extractingFeaturesList = new ArrayList<>();
-        List<ExtractingFeature> temp;
+
         List<List<Integer>> temp2;
         getI = new ArrayList<>();
         getIVariant = new ArrayList<>();
         for (int i = 0; i < RunnerConfig.featureExtractorsConfig.length; i++) {
             featureCombinations.add(temp2 = new ArrayList<>());
+            List<ExtractingFeature> temp;
             extractingFeaturesList.add(temp = new ArrayList<>());
             featuresList.add(new ArrayList<>());
-            for (IFeatureExtractor featureExtractor : RunnerConfig.featureExtractorsConfig[i].extractors) {
-                temp.add(new ExtractingFeature(keyWordsData, featureExtractor, articlesList, articlesId, articlesId, featuresList.get(featuresList.size()-1)));
-            }
-            for (List<Integer> variant : RunnerConfig.featureExtractorsConfig[i].variantsList) {
-                temp2.add(variant);
-                getI.add(i);
-                getIVariant.add(variant);
+            for (int articlesId = 0; articlesId < RunnerConfig.dataSetsRange; articlesId++) {
+                for (IFeatureExtractor featureExtractor : RunnerConfig.featureExtractorsConfig[i].extractors) {
+                    temp.add(new ExtractingFeature(keyWordsData, featureExtractor, articlesList, articlesId, featuresList.get(featuresList.size() - 1)));
+                }
+                for (List<Integer> variant : RunnerConfig.featureExtractorsConfig[i].variantsList) {
+                    temp2.add(variant);
+                    getI.add(i);
+                    getIVariant.add(new ArrayList<>(variant));
+                }
             }
         }
         range = getI.size();
@@ -50,8 +56,8 @@ public class ExtractingFeatures extends Configurable {
 
     private void perform(int extractorListId, List<Integer> variant) {
         int i = 0;
-        for (ExtractingFeature extractingFeatures: extractingFeaturesList.get(extractorListId)) {
-            extractingFeatures.perform(variant.get(i));
+        for (ExtractingFeature extractingFeatures : extractingFeaturesList.get(extractorListId)) {
+            extractingFeatures.perform(variant.get(i/RunnerConfig.dataSetsRange));
             i++;
         }
     }

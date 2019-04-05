@@ -15,14 +15,13 @@ public class ExtractingFeature extends Configurable {
 
     private IFeatureExtractor featureExtractor;
     private List<List<Article>> articlesList;
-    private int articleId, articlesId;
+    private int articlesId;
     private List<Map<ExtractionMethod, Map<String, List<String>>>> keyWordsList;
     private KeyWordsData keyWordsData;
 
-    public List<FeatureVector> featuresList;
+    public List<List<FeatureVector>> featuresList;
 
-    public ExtractingFeature(KeyWordsData keyWordsData, IFeatureExtractor featureExtractor, List<List<Article>> articlesList, int articleId, int articlesId, List<FeatureVector> featuresList) {
-        this.articleId = articleId;
+    public ExtractingFeature(KeyWordsData keyWordsData, IFeatureExtractor featureExtractor, List<List<Article>> articlesList, int articlesId, List<List<FeatureVector>> featuresList) {
         this.articlesId = articlesId;
         this.featureExtractor = featureExtractor;
         this.articlesList = articlesList;
@@ -34,26 +33,28 @@ public class ExtractingFeature extends Configurable {
     @Override
     public void perform(int i) {
         featureExtractor.setVariant(i);
-        System.out.println("performing feature extraction variant: " + i);
+        System.out.println("performing feature extraction variant: " + i + " articlesId: " + articlesId);
 
         ExtractorData data = new ExtractorData();
         data.keyWords = keyWordsList.get(articlesId);
         featureExtractor.setData(data);
 
+        featuresList.add(new ArrayList<>());
         int id = 0;
-        if (featuresList.isEmpty()) {
-            for (Article a : articlesList.get(articleId)) {
+        if (featuresList.get(featuresList.size()-1).isEmpty()) {
+            for (Article a : articlesList.get(articlesId)) {
                 FeatureVector fv;
-                featuresList.add(fv = new FeatureVector(a.getLabel()));
-                fv.origin = keyWordsData.origin;
+                featuresList.get(featuresList.size()-1).add(fv = new FeatureVector(a.getLabel()));
+                fv.origin = keyWordsData.origin.get(articlesId);
+                System.out.println(fv.origin);
                 if (featureExtractor.extractionMethod(i) != null)
                     fv.keyWordsMethod = featureExtractor.extractionMethod(i).name();
                 if (featureExtractor.similarityMethod(i) != null)
                     fv.similarity = featureExtractor.similarityMethod(i).getClass().getName();
             }
         }
-        for (Article a : articlesList.get(articleId)) {
-            featuresList.get(id).addFeatures(featureExtractor.extract(a));
+        for (Article a : articlesList.get(articlesId)) {
+            featuresList.get(featuresList.size()-1).get(id).addFeatures(featureExtractor.extract(a));
             id ++;
         }
         System.out.println("performed feature extraction variant: " + i);

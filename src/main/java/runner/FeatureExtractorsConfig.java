@@ -22,7 +22,6 @@ public class FeatureExtractorsConfig {
         fec.extractors.add(new AvgMaxKeyWordFeatureExtractor());
         fec.variantsList.add(Arrays.asList(0));
         fec.variantsList.add(Arrays.asList(1));
-        fec.variantsList.add(Arrays.asList(2));
         return fec;
     }
 

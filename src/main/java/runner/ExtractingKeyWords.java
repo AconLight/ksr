@@ -27,6 +27,8 @@ public class ExtractingKeyWords extends Configurable {
     @Override
     public void perform(int i) {
         keyWordsList.add(KeyWordExtractor.extractTopN(articles.get(i), N));
-        keyWordsData.origin = articles.get(0).get(0).origin;
+        keyWordsData.origin.add(articles.get(i).get(0).origin);
+        System.out.println(articles.get(i).get(0).origin);
+        System.out.println(i);
     }
 }
