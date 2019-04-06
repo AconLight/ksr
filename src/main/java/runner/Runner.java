@@ -46,7 +46,7 @@ public class Runner {
 
         operations.add(new ExtractingDataSets(dataSets, articlesList, articlesListTest, articlesListTrain));
         operations.add(new ExtractingKeyWords(RunnerConfig.dataSetsRange, articlesListTrain, keyWordsData));
-        operations.add(new ExtractingFeatures(articlesListTrain, featuresLists, keyWordsData));
+        operations.add(new ExtractingFeatures(articlesListTest, featuresLists, keyWordsData));
         operations.add(new KNNRunner(results, knnList, featuresLists, Arrays.asList(RunnerConfig.metrics)));
 
     }
@@ -118,8 +118,13 @@ public class Runner {
                         negatives.put((r.knn), 1);
                     else
                         negatives.put((r.knn), 0);
-                } else if (!r.knn.equalsIgnoreCase(r.knn)) {
+                } else if (!r.originalLabel.equalsIgnoreCase(r.knn)) {
                     negatives.put((r.knn), negatives.get((r.knn))+1);
+                }
+
+                for (Map.Entry<String, Integer> posEntry: originalLabelsCount.entrySet()) {
+                    if (negatives.get(posEntry.getKey()) == null)
+                        negatives.put(posEntry.getKey(), 0);
                 }
 
             }

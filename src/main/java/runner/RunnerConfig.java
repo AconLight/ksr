@@ -14,10 +14,18 @@ import java.util.List;
 import java.util.Map;
 
 public class RunnerConfig {
-    public static int dataSetsRange = 2;
-    public static FeatureExtractorsConfig[] featureExtractorsConfig = {
-            FeatureExtractorsConfig.fec1()
+
+    public static int[] freqN = {5, 10, 15};
+
+    public static float[][] avgWeights = {
+            {1f, 1f, 1f},
+            {0.2f, 0.6f, 1f},
+            {1f, 0.6f, 0.2f},
+            {0.2f, 1f, 0,2f},
+            {1f, 0.2f, 1f}
     };
+
+    public static int dataSetsRange = 1;
 
     public static List<Map<ExtractionMethod, Map<String, List<String>>>> keyWordsList;
 
@@ -33,4 +41,8 @@ public class RunnerConfig {
     };
 
     public static int[] k = { 3 };
+
+    public static FeatureExtractorsConfig[] featureExtractorsConfig = {
+            FeatureExtractorsConfig.fec2()
+    };
 }

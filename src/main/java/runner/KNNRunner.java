@@ -4,8 +4,7 @@ import core.Knn;
 import dataOperations.FeatureVector;
 import metrics.IMetric;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class KNNRunner extends Configurable {
 
@@ -37,11 +36,19 @@ public class KNNRunner extends Configurable {
                 String metricStr = metric.getClass().getName();
                 for (List<FeatureVector> vector2 : vectors) {
                     Knn myKnn;
-                    List<FeatureVector> vectorsNotUsa = new ArrayList<>();
-                    for (FeatureVector v :vector2){
-                        if (v.label != "usa") vectorsNotUsa.add(v);
+                    Map<String, Integer> vectorsClassCount = new HashMap<>();
+                    List<FeatureVector> vecClass = new ArrayList<>();
+                    for (FeatureVector vec: vector2) {
+                        if (vectorsClassCount.get(vec.label) == null) {
+                            vectorsClassCount.put(vec.label, 1);
+                            vecClass.add(vec);
+                        }
+                        else if (vectorsClassCount.get(vec.label) < 5) {
+                            vectorsClassCount.put(vec.label, vectorsClassCount.get(vec.label) + 1);
+                            vecClass.add(vec);
+                        }
                     }
-                    knns.add(myKnn = new Knn(RunnerConfig.k[i/RunnerConfig.dataSetsRange], vectorsNotUsa, metric));
+                    knns.add(myKnn = new Knn(RunnerConfig.k[i/RunnerConfig.dataSetsRange], vecClass, metric));
                     for (FeatureVector vector : vector2) {
                         String res = myKnn.evaluateAndAddToDataset(vector);
                         Result r = new Result();

@@ -1,69 +1,54 @@
 {
-"title": "data set: train dataSet 0 - train: 1635, test: 181 k in KNN: ( 3) knn metric: ( metrics.ManhattanMetric) word similarity: word.similarity.GeneralizedNGramWithLimits) key words extraction method: (TFIDF) features: Avg max keywords { label: west-germany} Avg max keywords { label: usa} Avg max keywords { label: france} Avg max keywords { label: uk} Avg max keywords { label: canada} Avg max keywords { label: japan} )",
+"title": "data set: train dataSet 0 - train: 1635, test: 181 k in KNN: ( 3) knn metric: ( metrics.ChebyshevMetric) word similarity: word.similarity.NGram) key words extraction method: (TFIDF) features: Avg max keywords (weights: [1.0, 1.0, 1.0, ]) { label: west-germany} Avg max keywords (weights: [1.0, 1.0, 1.0, ]) { label: usa} Avg max keywords (weights: [1.0, 1.0, 1.0, ]) { label: france} Avg max keywords (weights: [1.0, 1.0, 1.0, ]) { label: uk} Avg max keywords (weights: [1.0, 1.0, 1.0, ]) { label: canada} Avg max keywords (weights: [1.0, 1.0, 1.0, ]) { label: japan} Frequency keywords (N: 5) { label: west-germany} Frequency keywords (N: 5) { label: usa} Frequency keywords (N: 5) { label: france} Frequency keywords (N: 5) { label: uk} Frequency keywords (N: 5) { label: canada} Frequency keywords (N: 5) { label: japan} )",
 "precision": {
-"usa": 1.0,
-"canada": 1.0,
-"japan": 1.0,
-"uk": 1.0,
-"france": 1.0,
-"west-germany": 1.0
+"usa": 0.71428573,
+"canada": 0.06790123,
+"japan": 0.36363637,
+"uk": 0.0,
+"france": NaN
 },
 "recall": {
-"usa": 1.0,
-"canada": 0.046511628,
-"japan": 0.15384616,
-"uk": 0.14814815,
-"france": 0.21428572,
-"west-germany": 0.13636364
+"usa": 0.032894738,
+"canada": 0.9166667,
+"japan": 0.8,
+"uk": 0.0,
+"france": 0.0
 },
 "confusion matrix": [
 {"usa": [
-{"usa": 2698},
-{"canada": 246},
-{"japan": 42},
-{"uk": 138},
-{"france": 42},
-{"west-germany": 30}
-]},
-{"canada": [
-{"usa": null},
-{"canada": 12},
-{"japan": 2},
-{"uk": null},
-{"france": 2},
-{"west-germany": null}
-]},
-{"japan": [
-{"usa": null},
-{"canada": null},
-{"japan": 8},
-{"uk": null},
-{"france": null},
-{"west-germany": 4}
-]},
-{"uk": [
-{"usa": null},
+{"usa": 5},
 {"canada": null},
 {"japan": null},
-{"uk": 24},
-{"france": null},
-{"west-germany": 4}
+{"uk": 1},
+{"france": 1}
+]},
+{"canada": [
+{"usa": 141},
+{"canada": 11},
+{"japan": 1},
+{"uk": 6},
+{"france": 3}
+]},
+{"japan": [
+{"usa": 5},
+{"canada": 1},
+{"japan": 4},
+{"uk": null},
+{"france": 1}
+]},
+{"uk": [
+{"usa": 1},
+{"canada": null},
+{"japan": null},
+{"uk": null},
+{"france": null}
 ]},
 {"france": [
 {"usa": null},
 {"canada": null},
 {"japan": null},
 {"uk": null},
-{"france": 12},
-{"west-germany": null}
-]},
-{"west-germany": [
-{"usa": null},
-{"canada": null},
-{"japan": null},
-{"uk": null},
-{"france": null},
-{"west-germany": 6}
+{"france": null}
 ]}
 ]
 }

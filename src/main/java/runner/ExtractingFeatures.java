@@ -41,9 +41,7 @@ public class ExtractingFeatures extends Configurable {
             extractingFeaturesList.add(temp = new ArrayList<>());
             featuresList.add(new ArrayList<>());
             for (int articlesId = 0; articlesId < RunnerConfig.dataSetsRange; articlesId++) {
-                for (IFeatureExtractor featureExtractor : RunnerConfig.featureExtractorsConfig[i].extractors) {
-                    temp.add(new ExtractingFeature(keyWordsData, featureExtractor, articlesList, articlesId, featuresList.get(featuresList.size() - 1)));
-                }
+                    temp.add(new ExtractingFeature(i, keyWordsData, RunnerConfig.featureExtractorsConfig[i].extractors, articlesList, articlesId, featuresList.get(featuresList.size() - 1)));
                 for (List<Integer> variant : RunnerConfig.featureExtractorsConfig[i].variantsList) {
                     temp2.add(variant);
                     getI.add(i);
