@@ -56,6 +56,7 @@ public class Runner {
             op.performAll();
         }
         List<String> resultsStr = new ArrayList<>();
+        List<String> bestResultsStr = new ArrayList<>();
         System.out.println("results:");
         for (Result r: results) {
             System.out.println(r.toString());
@@ -63,13 +64,20 @@ public class Runner {
 
         HashMap<String, List<Result>> experiments = new HashMap<>();
 
+        float bestAvgPrec = 0;
+        float bestAvgRec = 0;
+        float bestAvgPrecRec = 0;
+
         for (Result r: results) {
-            if (experiments.get((r.dataSets + r.k + r.metric + r.wordSimilarity + r.keyWords + r.extractorsWithVariants)) == null) {
+            String ds = "";
+            if (RunnerConfig.mode == 0) ds = r.dataSets;
+
+            if (experiments.get((ds + r.k + r.metric + r.wordSimilarity + r.keyWords + r.extractorsWithVariants)) == null) {
                 List<Result> newR;
-                experiments.put((r.dataSets + r.k + r.metric + r.wordSimilarity + r.keyWords + r.extractorsWithVariants), newR = new ArrayList<>());
+                experiments.put((ds + r.k + r.metric + r.wordSimilarity + r.keyWords + r.extractorsWithVariants), newR = new ArrayList<>());
                 newR.add(r);
             } else {
-                experiments.get((r.dataSets + r.k + r.metric + r.wordSimilarity + r.keyWords + r.extractorsWithVariants)).add(r);
+                experiments.get((ds + r.k + r.metric + r.wordSimilarity + r.keyWords + r.extractorsWithVariants)).add(r);
             }
         }
 
@@ -128,7 +136,8 @@ public class Runner {
                 }
 
             }
-
+            float avgPrec = 0;
+            int sum = 0;
             for (Map.Entry<String, Integer> posEntry: positives.entrySet()) {
                 if (posEntry.getValue() == null) {
                     precision.put(posEntry.getKey(), 0f);
@@ -138,16 +147,54 @@ public class Runner {
                         neg = negatives.get(posEntry.getKey());
                     }
                     precision.put(posEntry.getKey(), (1f * posEntry.getValue() / (posEntry.getValue() + neg)));
+                    if ((posEntry.getValue() + neg) != 0) {
+                        avgPrec += originalLabelsCount.get(posEntry.getKey())*(1f * posEntry.getValue() / (posEntry.getValue() + neg));
+                        sum += originalLabelsCount.get(posEntry.getKey());
+                    }
                 }
             }
+
+            avgPrec /= sum;
+
+
+            float avgRec = 0;
+            int sumRec = 0;
 
             for (Map.Entry<String, Integer> posEntry: positives.entrySet()) {
                 if (posEntry.getValue() == null) {
                     recall.put(posEntry.getKey(), 0f);
                 } else {
                     recall.put(posEntry.getKey(), (1f * posEntry.getValue() / originalLabelsCount.get(posEntry.getKey())));
+                    if ((originalLabelsCount.get(posEntry.getKey())) != 0) {
+                        avgRec += originalLabelsCount.get(posEntry.getKey())*(1f * posEntry.getValue() / originalLabelsCount.get(posEntry.getKey()));
+                        sumRec += originalLabelsCount.get(posEntry.getKey());
+                    }
                 }
             }
+
+            avgRec /= sumRec;
+
+            boolean isBest = false;
+
+            if (avgRec > bestAvgRec) {
+                bestAvgRec = avgRec;
+                isBest = true;
+            }
+
+            if (avgPrec > bestAvgPrec) {
+                bestAvgPrec = avgPrec;
+                isBest = true;
+            }
+
+            if (avgPrec + avgRec > bestAvgPrecRec) {
+                bestAvgPrecRec = avgPrec + avgRec;
+                isBest = true;
+            }
+
+            rs += "\"averagePrecision\": " + avgPrec + ",\n";
+            rs += "\"averageRecall\": " + avgRec + ",\n";
+            rs += "\"averagePrecisionRecall\": " + (avgRec + avgPrec) + ",\n";
+
 
             rs += "\"precision\": {\n";
             boolean flaga = false;
@@ -201,6 +248,10 @@ public class Runner {
             rs += "\n}";
             resultsStr.add(rs);
 
+            if (isBest) {
+                bestResultsStr.add(rs);
+            }
+
 
 
         }
@@ -213,6 +264,22 @@ public class Runner {
                 System.out.println();
                 System.out.println(t);
                 PrintWriter out = new PrintWriter(new FileOutputStream(runnerresultsPath(asd +"").toFile()));
+                out.print(t);
+                out.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            asd ++;
+        }
+
+        deleteFolder(bestrunnerresultsPathDir.toFile());
+
+        asd = 0;
+        for (String t: bestResultsStr) {
+            try {
+                System.out.println();
+                System.out.println(t);
+                PrintWriter out = new PrintWriter(new FileOutputStream(bestrunnerresultsPath(asd +"").toFile()));
                 out.print(t);
                 out.close();
             } catch (FileNotFoundException e) {

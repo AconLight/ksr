@@ -15,6 +15,10 @@ import java.util.Map;
 
 public class RunnerConfig {
 
+    public static int mode = 1;
+    // 0 - by datasets
+    // 1 - not by datasets
+
     public static int[] freqN = {5, 10, 15};
 
     public static float[][] avgWeights = {
@@ -25,7 +29,7 @@ public class RunnerConfig {
             {1f, 0.2f, 1f}
     };
 
-    public static int dataSetsRange = 1;
+    public static int dataSetsRange = 3;
 
     public static List<Map<ExtractionMethod, Map<String, List<String>>>> keyWordsList;
 

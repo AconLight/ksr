@@ -19,5 +19,9 @@ public class Config {
     public static Path runnerresultsPath(String name) {
         return rootPath.resolve("data").resolve("runnerresults").resolve(name);
     }
+    public static final Path bestrunnerresultsPathDir = rootPath.resolve("data").resolve("bestrunnerresults");
+    public static Path bestrunnerresultsPath(String name) {
+        return rootPath.resolve("data").resolve("bestrunnerresults").resolve(name);
+    }
     public static final Path allSetPath = rootPath.resolve("data").resolve("dataSet");
 }
