@@ -40,7 +40,7 @@ public class AvgMaxKeyWordFeatureExtractor implements IFeatureExtractor<Article>
         List<Feature> features = new ArrayList<>();
         for (String label : placesLabels) {
             double value = avgMaxDistances(maxDistances(object.getTextWords(), keyWords.get(extractionMethod).get(label)));
-            features.add(new Feature(value, "Avg max keywords {" + extractionMethod + similarityMethod + ", " + label + "}"));
+            features.add(new Feature(value, "Avg max keywords { label: "  + label + "}"));
 
         }
         return features;

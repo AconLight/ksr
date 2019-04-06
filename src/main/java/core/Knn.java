@@ -11,7 +11,7 @@ import static utils.Utils.getTopNFromIntMap;
 import static utils.Utils.sortIntMap;
 
 public class Knn {
-    private int k;
+    public int k;
     private FeatureDataset dataset;
     private IMetric metric;
 

@@ -57,12 +57,12 @@ public class Runner {
         HashMap<String, List<Result>> experiments = new HashMap<>();
 
         for (Result r: results) {
-            if (experiments.get((r.dataSets + r.metric + r.wordSimilarity + r.keyWords + r.extractorsWithVariants)) == null) {
+            if (experiments.get((r.dataSets + r.k + r.metric + r.wordSimilarity + r.keyWords + r.extractorsWithVariants)) == null) {
                 List<Result> newR;
-                experiments.put((r.dataSets + r.metric + r.wordSimilarity + r.keyWords + r.extractorsWithVariants), newR = new ArrayList<>());
+                experiments.put((r.dataSets + r.k + r.metric + r.wordSimilarity + r.keyWords + r.extractorsWithVariants), newR = new ArrayList<>());
                 newR.add(r);
             } else {
-                experiments.get((r.dataSets + r.metric + r.wordSimilarity + r.keyWords + r.extractorsWithVariants)).add(r);
+                experiments.get((r.dataSets + r.k + r.metric + r.wordSimilarity + r.keyWords + r.extractorsWithVariants)).add(r);
             }
         }
 

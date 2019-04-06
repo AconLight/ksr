@@ -45,13 +45,14 @@ public class KNNRunner extends Configurable {
                     for (FeatureVector vector : vector2) {
                         String res = myKnn.evaluateAndAddToDataset(vector);
                         Result r = new Result();
-                        r.dataSets = vector.origin;
-                        r.keyWords = vector.keyWordsMethod;
-                        r.wordSimilarity = vector.similarity;
-                        r.extractorsWithVariants = vector.getFeatureNamesToString();
+                        r.k = " k in KNN: ( " + myKnn.k + ")";
+                        r.dataSets = "data set: " + vector.origin;
+                        r.keyWords = " key words extraction method: (" + vector.keyWordsMethod + ")";
+                        r.wordSimilarity = " word similarity: " + vector.similarity + ")";
+                        r.extractorsWithVariants = " features: " + vector.getFeatureNamesToString() + ")";
                         r.originalLabel = vector.label;
                         r.knn = res;
-                        r.metric = metricStr;
+                        r.metric = " knn metric: ( " + metricStr + ")";
                         resultsList.add(r);
                     }
                 }

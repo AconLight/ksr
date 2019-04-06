@@ -46,7 +46,7 @@ public class ExtractingFeature extends Configurable {
                 FeatureVector fv;
                 featuresList.get(featuresList.size()-1).add(fv = new FeatureVector(a.getLabel()));
                 fv.origin = keyWordsData.origin.get(articlesId);
-                System.out.println(fv.origin);
+                //System.out.println(fv.origin);
                 if (featureExtractor.extractionMethod(i) != null)
                     fv.keyWordsMethod = featureExtractor.extractionMethod(i).name();
                 if (featureExtractor.similarityMethod(i) != null)
