@@ -15,5 +15,9 @@ public class Config {
     public static final Path testSetPath = rootPath.resolve("data").resolve("testSet");
     public static final Path initTestSetPath = rootPath.resolve("data").resolve("initTestSet");
     public static final Path resultsPath = rootPath.resolve("data").resolve("results");
+    public static final Path runnerresultsPathDir = rootPath.resolve("data").resolve("runnerresults");
+    public static Path runnerresultsPath(String name) {
+        return rootPath.resolve("data").resolve("runnerresults").resolve(name);
+    }
     public static final Path allSetPath = rootPath.resolve("data").resolve("dataSet");
 }

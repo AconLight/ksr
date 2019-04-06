@@ -1,0 +1,69 @@
+{
+"title": "data set: train dataSet 1 - train: 1635, test: 181 k in KNN: ( 3) knn metric: ( metrics.EuclideanMetric) word similarity: word.similarity.NGram) key words extraction method: (TFIDF) features: Avg max keywords { label: west-germany} Avg max keywords { label: usa} Avg max keywords { label: france} Avg max keywords { label: uk} Avg max keywords { label: canada} Avg max keywords { label: japan} )",
+"precision": {
+"usa": 1.0,
+"canada": 1.0,
+"japan": 1.0,
+"uk": 1.0,
+"france": 1.0,
+"west-germany": 1.0
+},
+"recall": {
+"usa": 1.0,
+"canada": 0.0546875,
+"japan": 0.14814815,
+"uk": 0.15789473,
+"france": 0.06896552,
+"west-germany": 0.21052632
+},
+"confusion matrix": [
+{"usa": [
+{"usa": 2712},
+{"canada": 242},
+{"japan": 44},
+{"uk": 122},
+{"france": 42},
+{"west-germany": 26}
+]},
+{"canada": [
+{"usa": null},
+{"canada": 14},
+{"japan": 2},
+{"uk": 6},
+{"france": 12},
+{"west-germany": null}
+]},
+{"japan": [
+{"usa": null},
+{"canada": null},
+{"japan": 8},
+{"uk": null},
+{"france": null},
+{"west-germany": null}
+]},
+{"uk": [
+{"usa": null},
+{"canada": null},
+{"japan": null},
+{"uk": 24},
+{"france": null},
+{"west-germany": 2}
+]},
+{"france": [
+{"usa": null},
+{"canada": null},
+{"japan": null},
+{"uk": null},
+{"france": 4},
+{"west-germany": 2}
+]},
+{"west-germany": [
+{"usa": null},
+{"canada": null},
+{"japan": null},
+{"uk": null},
+{"france": null},
+{"west-germany": 8}
+]}
+]
+}

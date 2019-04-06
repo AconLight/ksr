@@ -11,7 +11,13 @@ import dataOperations.featureExtractors.MainFeatureExtractor;
 import metrics.IMetric;
 import utils.ExtractionMethod;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.util.*;
+
+import static config.Config.*;
 
 public class Runner {
     private List<Configurable> operations;
@@ -49,6 +55,7 @@ public class Runner {
         for (Configurable op: operations) {
             op.performAll();
         }
+        List<String> resultsStr = new ArrayList<>();
         System.out.println("results:");
         for (Result r: results) {
             System.out.println(r.toString());
@@ -67,8 +74,13 @@ public class Runner {
         }
 
         System.out.println("results by experiment:");
+
         for (Map.Entry<String, List<Result>> entry: experiments.entrySet()) {
+            String rs = "";
+
             System.out.println(entry.getKey());
+            rs += "{\n";
+            rs += "\"title\": \"" + entry.getKey() + "\",\n";
             float good = 0;
             float bad = 0;
             HashMap<String, Integer> confMatrix = new HashMap<>();
@@ -131,14 +143,93 @@ public class Runner {
                     recall.put(posEntry.getKey(), (1f * posEntry.getValue() / originalLabelsCount.get(posEntry.getKey())));
                 }
             }
-            System.out.println("precision");
-            System.out.println(precision);
-            System.out.println();
-            System.out.println("recall");
-            System.out.println(recall);
-            System.out.println();
+
+            rs += "\"precision\": {\n";
+            boolean flaga = false;
+            for (Map.Entry<String, Float> pentry: precision.entrySet()) {
+                if (flaga) {
+                    rs += ",\n";
+                }
+                flaga = true;
+                rs += "\"" + pentry.getKey() + "\": " + pentry.getValue();
+            }
+
+            rs += "\n},\n";
+
+            rs += "\"recall\": {\n";
+            flaga = false;
+            for (Map.Entry<String, Float> pentry: recall.entrySet()) {
+                if (flaga) {
+                    rs += ",\n";
+                }
+                flaga = true;
+                rs += "\"" + pentry.getKey() + "\": " + pentry.getValue();
+            }
+
+            rs += "\n},\n";
+
+            rs += "\"confusion matrix\": [\n";
+
+
+            flaga = false;
+            for (Map.Entry<String, Integer> pentry: originalLabelsCount.entrySet()) {
+                if (flaga) {
+                    rs += ",\n";
+                }
+                flaga = true;
+                rs += "{\"" + pentry.getKey() + "\": [\n";
+                boolean flaga2 = false;
+                for (Map.Entry<String, Integer> pentry2: originalLabelsCount.entrySet()) {
+                    if (flaga2) {
+                        rs += ",\n";
+                    }
+                    flaga2 = true;
+                    rs += "{\"" + pentry2.getKey() + "\": " + confMatrix.get(pentry.getKey() + " " + pentry2.getKey()) + "}";
+                }
+                rs += "\n]}";
+
+                //rs += "\"" + pentry.getKey() + "\": " + pentry.getValue();
+            }
+
+            rs += "\n]";
+
+            rs += "\n}";
+            resultsStr.add(rs);
+
+
+
         }
 
+        deleteFolder(runnerresultsPathDir.toFile());
+
+        int asd = 0;
+        for (String t: resultsStr) {
+            try {
+                System.out.println();
+                System.out.println(t);
+                PrintWriter out = new PrintWriter(new FileOutputStream(runnerresultsPath(asd +"").toFile()));
+                out.print(t);
+                out.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            asd ++;
+        }
+
+    }
+
+    public static void deleteFolder(File folder) {
+        File[] files = folder.listFiles();
+        if(files!=null) { //some JVMs return null for empty dirs
+            for(File f: files) {
+                if(f.isDirectory()) {
+                    deleteFolder(f);
+                } else {
+                    f.delete();
+                }
+            }
+        }
+        //folder.delete();
     }
 
 

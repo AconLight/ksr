@@ -11,7 +11,7 @@ class StatWriter {
     static void write(TestResults testResults) {
         PrintWriter writer = null;
         try {
-            writer = new PrintWriter(new FileOutputStream(resultsPath.toFile(), true));
+            writer = new PrintWriter(new FileOutputStream((resultsPath).toFile(), true));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
