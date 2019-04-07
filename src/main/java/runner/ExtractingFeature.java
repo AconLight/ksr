@@ -50,16 +50,17 @@ public class ExtractingFeature extends Configurable {
                 for (Article a : articlesList.get(articlesId)) {
                     FeatureVector fv;
                     featuresList.get(featuresList.size() - 1).add(fv = new FeatureVector(a.getLabel()));
-                    fv.origin = keyWordsData.origin.get(articlesId);
+                    fv.origin = keyWordsData.origin.get(articlesId) + "elo";
                     //System.out.println(fv.origin);
                     if (featureExtractor.extractionMethod(i) != null)
                         fv.keyWordsMethod = featureExtractor.extractionMethod(i).name();
                     if (featureExtractor.similarityMethod(i) != null)
-                        fv.similarity = featureExtractor.similarityMethod(i).getClass().getName();
+                        fv.similarity = featureExtractor.similarityMethod(i).getClass().getName() + featureExtractor.similarityMethod(i).getParams();
                 }
             }
             for (Article a : articlesList.get(articlesId)) {
                 featuresList.get(featuresList.size() - 1).get(id).addFeatures(featureExtractor.extract(a));
+                featuresList.get(featuresList.size() - 1).get(id).origin += "elo";
                 id++;
             }
            // System.out.println("id1: " + (featuresList.size() - 1));

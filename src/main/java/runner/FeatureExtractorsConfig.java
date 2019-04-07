@@ -24,7 +24,8 @@ public class FeatureExtractorsConfig {
         fec.extractors.add(new FrequencyKeyWordExtractor());
         fec.variantsList.addAll(generateAllComb2(
                 RunnerConfig.avgWeights.length*RunnerConfig.wordSimilarities.length*3,
-                RunnerConfig.freqN.length*RunnerConfig.wordSimilarities.length*3));
+                RunnerConfig.freqN.length*RunnerConfig.wordSimilarities.length*3
+        ));
         return fec;
     }
 
@@ -59,11 +60,28 @@ public class FeatureExtractorsConfig {
         return result;
     }
 
+    public static FeatureExtractorsConfig fec3() {
+        FeatureExtractorsConfig fec = new FeatureExtractorsConfig();
+        fec.extractors.add(new AvgMaxKeyWordFeatureExtractor());
+        fec.extractors.add(new FrequencyKeyWordExtractor());
+        fec.variantsList.add(Arrays.asList(2, 2));
+        fec.variantsList.add(Arrays.asList(1, 1));
+        fec.variantsList.add(Arrays.asList(0, 0));
+        return fec;
+    }
+
     public static FeatureExtractorsConfig fec2() {
         FeatureExtractorsConfig fec = new FeatureExtractorsConfig();
         fec.extractors.add(new AvgMaxKeyWordFeatureExtractor());
         fec.extractors.add(new FrequencyKeyWordExtractor());
-        fec.variantsList.add(Arrays.asList(0, 0));
+        fec.variantsList.add(Arrays.asList(16+0, 21));
+        fec.variantsList.add(Arrays.asList(16+1, 21));
+        fec.variantsList.add(Arrays.asList(16+2, 21));
+        fec.variantsList.add(Arrays.asList(16+3, 21));
+        fec.variantsList.add(Arrays.asList(16+4, 21));
+        fec.variantsList.add(Arrays.asList(16+5, 21));
+        fec.variantsList.add(Arrays.asList(16+6, 21));
+        fec.variantsList.add(Arrays.asList(16+7, 21));
         return fec;
     }
 

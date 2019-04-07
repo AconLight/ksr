@@ -171,7 +171,7 @@ public class Runner {
                     }
                 }
             }
-
+            System.out.print(keyWordsData.keyWordsList);
             avgRec /= sumRec;
 
             boolean isBest = false;

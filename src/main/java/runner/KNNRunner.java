@@ -22,7 +22,7 @@ public class KNNRunner extends Configurable {
         this.knn = knn;
         this.metrics = metrics;
         this.resultsList = resultsList;
-        this.range = initiatingVectors.size();
+        this.range = RunnerConfig.k.length;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class KNNRunner extends Configurable {
                             vectorsClassCount.put(vec.label, 1);
                             vecClass.add(vec);
                         }
-                        else if (vectorsClassCount.get(vec.label) < 5) {
+                        else if (vectorsClassCount.get(vec.label) < 10) {
                             vectorsClassCount.put(vec.label, vectorsClassCount.get(vec.label) + 1);
                             vecClass.add(vec);
                         }

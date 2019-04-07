@@ -28,6 +28,11 @@ public class NGram implements IWordSimilarity {
         return g / d;
     }
 
+    @Override
+    public String getParams() {
+        return "(n: " + n + ")";
+    }
+
     public double commonSubstrings(String shorter, Set<String> possibleSubstrings) {
         double sum = 0;
 

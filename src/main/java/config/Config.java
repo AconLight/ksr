@@ -7,8 +7,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Config {
+    public static  String tag = "PLACES";
     private static final String[] acceptedPlaces = {"west-germany", "usa", "france", "uk", "canada", "japan"};
-    public static final List<String> placesLabels = new ArrayList<>(Arrays.asList(acceptedPlaces));
+    private static final String[] acceptedTopics = {"acq", "money-supply", "money-fx ", "crude", "copper"};
+    private static final String[] acceptedMail = {"subject", "forward", "question", "work", "follow", "free", "click", "money", "order"};
+    public static List<String> placesLabels = new ArrayList<>(Arrays.asList(acceptedMail));
 
     public static final Path rootPath = Paths.get(".");
     public static final Path learningSetPath = rootPath.resolve("data").resolve("learningSet");
@@ -24,4 +27,7 @@ public class Config {
         return rootPath.resolve("data").resolve("bestrunnerresults").resolve(name);
     }
     public static final Path allSetPath = rootPath.resolve("data").resolve("dataSet");
+    public static final Path mailSets = rootPath.resolve("data").resolve("dataSetMail").resolve("mail");
+    public static final Path spamSets = rootPath.resolve("data").resolve("dataSetMail").resolve("spam");
+    public static final Path runnerConfig = rootPath.resolve("data").resolve("runnerConfig");
 }

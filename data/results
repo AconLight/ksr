@@ -1,6 +1,11 @@
-{ngram:1, initSizePerClass:35, k:3, numberOfKeywords:3, extractionMethod:OVERALL_WORD_OCCURRENCES, precision:0.871}
-{ngram:2, initSizePerClass:35, k:3, numberOfKeywords:3, extractionMethod:OVERALL_WORD_OCCURRENCES, precision:0.871}
-{ngram:3, initSizePerClass:35, k:3, numberOfKeywords:3, extractionMethod:OVERALL_WORD_OCCURRENCES, precision:0.823}
-{ngram:4, initSizePerClass:35, k:3, numberOfKeywords:3, extractionMethod:OVERALL_WORD_OCCURRENCES, precision:0.871}
-
-{ngram:1, initSizePerClass:35, k:3, numberOfKeywords:3, extractionMethod:TFIDF, precision:0.8714285714285714}
+{ngram:1, initSizePerClass:35, k:3, numberOfKeywords:5, extractionMethod:TFIDF, precision:0.054212454212454214}
+{, initSizePerClass:35, k:3, numberOfKeywords:5, precision:0.054212454212454214}
+{, confusion matrix:{japan canada=58, canada canada=72, uk usa=1, france usa=1, france canada=30, west-germany canada=27, usa canada=1030, usa usa=2, uk canada=144}}
+{, confusion matrix:{japan canada=58, canada canada=72, uk usa=1, france usa=1, france canada=30, west-germany canada=27, usa canada=1030, usa usa=2, uk canada=144}}
+{, confusion matrix:{crude money-fx=60, money-fx acq=4, acq money-fx=108, acq acq=99, money-fx money-fx=45}}
+{, confusion matrix:{acq crude=1, crude money-fx=58, crude crude=2, money-fx acq=3, acq money-fx=196, acq acq=10, money-fx money-fx=46}}
+{, confusion matrix:{crude money-fx=59, acq money-fx=206, acq acq=1, money-fx money-fx=49, crude acq=1}}
+{, confusion matrix:{money-fx acq=28, acq acq=170, money-fx money-fx=8, crude acq=39}}
+{, confusion matrix:{crude money-fx=60, acq money-fx=207, money-fx money-fx=49}}
+{, confusion matrix:{crude money-fx=60, acq money-fx=207, money-fx money-fx=49}}
+{, confusion matrix:{crude money-fx=59, acq money-fx=206, acq acq=1, money-fx money-fx=49, crude acq=1}}

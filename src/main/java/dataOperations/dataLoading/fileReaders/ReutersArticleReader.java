@@ -1,6 +1,7 @@
 package dataOperations.dataLoading.fileReaders;
 
 import classifiedObjects.Article;
+import config.Config;
 import dataOperations.preprocessing.IPreprocessor;
 
 import java.io.BufferedReader;
@@ -29,7 +30,7 @@ public class ReutersArticleReader implements IFileReader<Article> {
         return extractFile(file, marks);
     }
 
-    private String[] marks = {"PLACES", "TITLE", "BODY"};
+    private String[] marks = {Config.tag, "TITLE", "BODY"};
     private String[] marksToRemove = {"D"};
     private String[] stringsToRemove = {"REUTER", "&#3;"};
 
@@ -138,7 +139,13 @@ public class ReutersArticleReader implements IFileReader<Article> {
     private List<Article> dataListToToArticle(List<HashMap<String, String>> dataList) {
         List<Article> articles = new ArrayList<>();
         for (HashMap<String, String> articleData : dataList) {
-            String label = articleData.get("PLACES").trim();
+            if (articleData.get(Config.tag) == null) continue;
+            //System.out.println(articleData.get("TOPICS"));
+            String label = articleData.get(Config.tag).trim();
+            String[] myLabel = label.split(" ");
+            if (myLabel.length > 0) {
+                label = myLabel[0];
+            }
             if (placeIsAccepted(label)) {
                 articles.add(new Article(articleData, label, this.preprocessor));
             }

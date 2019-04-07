@@ -17,8 +17,8 @@ public class AvgMaxKeyWordFeatureExtractor implements IFeatureExtractor<Article>
 
 
 
-    private IWordSimilarity similarityMethod;
-    private ExtractionMethod extractionMethod;
+    public IWordSimilarity similarityMethod;
+    public ExtractionMethod extractionMethod;
 
     @Override
     public IWordSimilarity similarityMethod(int i) {
@@ -48,6 +48,7 @@ public class AvgMaxKeyWordFeatureExtractor implements IFeatureExtractor<Article>
     public List<Feature> extract(Article object) {
         List<Feature> features = new ArrayList<>();
         for (String label : placesLabels) {
+            if (keyWords.get(extractionMethod).get(label) == null) continue;
             double value = avgMaxDistances(maxDistances(object.getTextWords(), keyWords.get(extractionMethod).get(label)));
             String nstr = "[";
             for (float s: N) {

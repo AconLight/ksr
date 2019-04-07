@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class ExtractingKeyWords extends Configurable {
 
-    private int N = 3;
+    private int N = 20;
 
     private List<List<Article>> articles;
 

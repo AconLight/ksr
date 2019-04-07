@@ -16,8 +16,8 @@ import static config.Config.placesLabels;
 public class FrequencyKeyWordExtractor implements IFeatureExtractor<Article> {
     private Map<ExtractionMethod, Map<String, List<String>>> keyWords;
 
-    private IWordSimilarity similarityMethod;
-    private ExtractionMethod extractionMethod;
+    public IWordSimilarity similarityMethod;
+    public ExtractionMethod extractionMethod;
 
     @Override
     public IWordSimilarity similarityMethod(int i) {
@@ -47,6 +47,7 @@ public class FrequencyKeyWordExtractor implements IFeatureExtractor<Article> {
     public List<Feature> extract(Article object) {
         List<Feature> features = new ArrayList<>();
         for (String label : placesLabels) {
+            if (keyWords.get(extractionMethod).get(label) == null) continue;
             double value = calcFreq(object.getTextWords(), keyWords.get(extractionMethod).get(label));
             features.add(new Feature(value, "Frequency keywords (N: " + N + ") { label: "  + label + "}"));
 

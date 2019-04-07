@@ -7,8 +7,13 @@ import java.util.Set;
 public class GeneralizedNGramWithLimits implements IWordSimilarity {
     private List<NGram> ngrams = new ArrayList<>();
 
+    private int l;
+    private int u;
+
     public GeneralizedNGramWithLimits(int lowerLimit, int upperLimit) {
         assert lowerLimit <= upperLimit;
+        l = lowerLimit;
+        u = upperLimit;
         for (int i = lowerLimit; i <= upperLimit; i++) {
             ngrams.add(new NGram(i));
         }
@@ -36,6 +41,11 @@ public class GeneralizedNGramWithLimits implements IWordSimilarity {
         }
 
         return commonSubparts / possibleSubparts;
+    }
+
+    @Override
+    public String getParams() {
+        return "(lower limit: " + l + ", upper limit: " + u + ")";
     }
 
 }

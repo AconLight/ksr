@@ -3,6 +3,8 @@ package runner;
 import classifiedObjects.Article;
 import config.Config;
 import dataOperations.dataLoading.DataLoader;
+import dataOperations.dataLoading.fileReaders.IFileReader;
+import dataOperations.dataLoading.fileReaders.MailReader;
 import dataOperations.dataLoading.fileReaders.ReutersArticleReader;
 import dataOperations.preprocessing.FullPreprocessor;
 import dataOperations.preprocessing.IPreprocessor;
@@ -36,9 +38,21 @@ public class ExtractingDataSets extends Configurable {
     public void perform(int i) {
         DataLoader<Article> loader = new DataLoader<>();
         IPreprocessor<String> preprocessor = new FullPreprocessor();
-        ReutersArticleReader reader = new ReutersArticleReader(preprocessor);
+        IFileReader reader;
         List<Article> temp;
-        Collections.shuffle(temp = loader.loadObjects(Config.allSetPath, reader), new Random(i));
+        if (RunnerConfig.isMail) {
+            reader = new MailReader(preprocessor);
+            temp = loader.loadObjects(Config.mailSets, reader);
+            temp.addAll(loader.loadObjects(Config.spamSets, reader));
+            Collections.shuffle(temp, new Random(i));
+        } else {
+            reader = new ReutersArticleReader(preprocessor);
+            Collections.shuffle(temp = loader.loadObjects(Config.allSetPath, reader), new Random(i));
+        }
+
+
+
+
         articlesList.add(temp);
         int lastId = temp.size() - 1;
         int trainI = (int)(temp.size() * divide);
