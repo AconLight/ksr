@@ -9,3 +9,10 @@
 {, confusion matrix:{crude money-fx=60, acq money-fx=207, money-fx money-fx=49}}
 {, confusion matrix:{crude money-fx=60, acq money-fx=207, money-fx money-fx=49}}
 {, confusion matrix:{crude money-fx=59, acq money-fx=206, acq acq=1, money-fx money-fx=49, crude acq=1}}
+{, confusion matrix:{crude money-fx=59, acq money-fx=206, acq acq=1, money-fx money-fx=49, crude acq=1}}
+{, confusion matrix:{japan canada=12, uk usa=127, canada canada=34, west-germany usa=24, france usa=15, france canada=16, west-germany canada=3, usa canada=268, usa usa=764, uk canada=18, canada usa=38, japan usa=46}}
+{, confusion matrix:{uk usa=145, west-germany usa=27, france usa=31, usa usa=1032, canada usa=72, japan usa=58}}
+{, confusion matrix:{uk usa=108, west-germany usa=20, france usa=25, usa usa=1065, canada usa=96, japan usa=50}}
+{, confusion matrix:{uk usa=108, west-germany usa=20, france usa=25, usa usa=1065, canada usa=96, japan usa=50}}
+{, confusion matrix:{japan canada=22, uk usa=134, canada canada=9, west-germany usa=24, france usa=27, france canada=4, west-germany canada=3, usa canada=130, usa usa=902, uk canada=11, canada usa=63, japan usa=36}}
+{, confusion matrix:{japan canada=22, uk usa=134, canada canada=9, west-germany usa=24, france usa=27, france canada=4, west-germany canada=3, usa canada=130, usa usa=902, uk canada=11, canada usa=63, japan usa=36}}

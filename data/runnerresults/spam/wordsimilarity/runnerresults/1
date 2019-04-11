@@ -1,0 +1,24 @@
+{
+"title": "data set: dataSet(size: 200, div: 0.6)-train(size: 120) k in KNN: ( 9) knn metric: ( metrics.ChebyshevMetric) word similarity: word.similarity.NGram(n: 3)) key words extraction method: (OVERALL_WORD_OCCURRENCES) features: Avg max keywords (weights: [1.0, 0.6, 0.2, ]) { label: mail}(keywords extraction: , word similarity: word.similarity.NGram(n: 3)) Avg max keywords (weights: [1.0, 0.6, 0.2, ]) { label: spam}(keywords extraction: , word similarity: word.similarity.NGram(n: 3)) Frequency keywords (N: 7) { label: mail}(keywords extraction: , word similarity: word.similarity.NGram(n: 3)) Frequency keywords (N: 7) { label: spam}(keywords extraction: , word similarity: word.similarity.NGram(n: 3)) )",
+"averagePrecision": 0.721519,
+"averageRecall": 0.721519,
+"averagePrecisionRecall": 1.443038,
+"precision": {
+"mail": 0.721519,
+"spam": NaN
+},
+"recall": {
+"mail": 1.0,
+"spam": 0.0
+},
+"confusion matrix": [
+{"mail": [
+{"mail": 57},
+{"spam": 22}
+]},
+{"spam": [
+{"mail": null},
+{"spam": null}
+]}
+]
+}

@@ -20,27 +20,14 @@ public class AvgMaxKeyWordFeatureExtractor implements IFeatureExtractor<Article>
     public IWordSimilarity similarityMethod;
     public ExtractionMethod extractionMethod;
 
-    @Override
-    public IWordSimilarity similarityMethod(int i) {
-        return RunnerConfig.wordSimilarities[i %  (RunnerConfig.wordSimilarities.length)];
-    }
-
-    @Override
-    public ExtractionMethod extractionMethod(int i) {
-        int j = i/ (RunnerConfig.wordSimilarities.length*RunnerConfig.avgWeights.length);
-        return ExtractionMethod.values()[j];
-    }
-
     public void setN(int i) {
-        N = RunnerConfig.avgWeights[(i / RunnerConfig.wordSimilarities.length) %  RunnerConfig.avgWeights.length];
+        N = RunnerConfig.avgWeights[i];
     }
 
     public float[] N;
 
     @Override
     public void setVariant(int i) {
-        similarityMethod = similarityMethod(i);
-        extractionMethod = extractionMethod(i);
         setN(i);
     }
 
@@ -90,6 +77,26 @@ public class AvgMaxKeyWordFeatureExtractor implements IFeatureExtractor<Article>
     @Override
     public void setData(ExtractorData data) {
         this.keyWords = data.keyWords;
+    }
+
+    @Override
+    public void setM(ExtractionMethod m) {
+        this.extractionMethod = m;
+    }
+
+    @Override
+    public void setW(IWordSimilarity w) {
+        this.similarityMethod = w;
+    }
+
+    @Override
+    public ExtractionMethod getM() {
+        return extractionMethod;
+    }
+
+    @Override
+    public IWordSimilarity getW() {
+        return similarityMethod;
     }
 
 

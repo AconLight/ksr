@@ -19,27 +19,34 @@ public class FrequencyKeyWordExtractor implements IFeatureExtractor<Article> {
     public IWordSimilarity similarityMethod;
     public ExtractionMethod extractionMethod;
 
-    @Override
-    public IWordSimilarity similarityMethod(int i) {
-        return RunnerConfig.wordSimilarities[i %  (RunnerConfig.wordSimilarities.length)];
-    }
-
-    @Override
-    public ExtractionMethod extractionMethod(int i) {
-        int j = i/ (RunnerConfig.wordSimilarities.length*RunnerConfig.freqN.length);
-        return ExtractionMethod.values()[j];
-    }
-
     public void setN(int i) {
-        N = RunnerConfig.freqN[(i / RunnerConfig.wordSimilarities.length) %  RunnerConfig.freqN.length];
+        N = RunnerConfig.freqN[i];
     }
 
     public int N;
 
     @Override
+    public void setM(ExtractionMethod m) {
+        this.extractionMethod = m;
+    }
+
+    @Override
+    public void setW(IWordSimilarity w) {
+        this.similarityMethod = w;
+    }
+
+    @Override
+    public ExtractionMethod getM() {
+        return extractionMethod;
+    }
+
+    @Override
+    public IWordSimilarity getW() {
+        return similarityMethod;
+    }
+
+    @Override
     public void setVariant(int i) {
-        similarityMethod = similarityMethod(i);
-        extractionMethod = extractionMethod(i);
         setN(i);
     }
 

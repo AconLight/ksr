@@ -8,10 +8,14 @@ import java.util.List;
 
 public class Config {
     public static  String tag = "PLACES";
-    private static final String[] acceptedPlaces = {"west-germany", "usa", "france", "uk", "canada", "japan"};
-    private static final String[] acceptedTopics = {"acq", "money-supply", "money-fx ", "crude", "copper"};
-    private static final String[] acceptedMail = {"subject", "forward", "question", "work", "follow", "free", "click", "money", "order"};
-    public static List<String> placesLabels = new ArrayList<>(Arrays.asList(acceptedMail));
+    public static String[] acceptedPlaces = {"west-germany", "france", "uk", "canada", "japan"};
+    public static final String[] acceptedTopics = {"acq", "money-supply", "money-fx ", "crude", "copper"};
+    public static final String[] acceptedMail = {"mail", "spam"};
+    public static List<String> placesLabels = new ArrayList<>(Arrays.asList(acceptedPlaces));
+
+    public static void setLabels(String[] labels) {
+        placesLabels = new ArrayList<>(Arrays.asList(labels));
+    }
 
     public static final Path rootPath = Paths.get(".");
     public static final Path learningSetPath = rootPath.resolve("data").resolve("learningSet");
@@ -19,6 +23,9 @@ public class Config {
     public static final Path initTestSetPath = rootPath.resolve("data").resolve("initTestSet");
     public static final Path resultsPath = rootPath.resolve("data").resolve("results");
     public static final Path runnerresultsPathDir = rootPath.resolve("data").resolve("runnerresults");
+    public static Path getRunnerresultsPath(String name1, String name2) {
+        return rootPath.resolve("data").resolve("runnerresults").resolve(name1).resolve(name2).resolve("runnerresults");
+    }
     public static Path runnerresultsPath(String name) {
         return rootPath.resolve("data").resolve("runnerresults").resolve(name);
     }

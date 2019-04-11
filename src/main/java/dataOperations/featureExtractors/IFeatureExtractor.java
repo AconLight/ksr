@@ -11,7 +11,8 @@ public interface IFeatureExtractor<T extends ClassifiedObject> {
     void setVariant(int i);
     List<Feature> extract(T object);
     void setData(ExtractorData data);
-
-    IWordSimilarity similarityMethod(int i);
-    ExtractionMethod extractionMethod(int i);
+    void setM(ExtractionMethod m);
+    void setW(IWordSimilarity w);
+    ExtractionMethod getM();
+    IWordSimilarity getW();
 }

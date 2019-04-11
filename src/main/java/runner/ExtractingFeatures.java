@@ -6,6 +6,7 @@ import dataOperations.FeatureVector;
 import dataOperations.featureExtractors.ExtractorData;
 import dataOperations.featureExtractors.IFeatureExtractor;
 import utils.ExtractionMethod;
+import word.similarity.IWordSimilarity;
 
 import java.util.*;
 
@@ -53,10 +54,31 @@ public class ExtractingFeatures extends Configurable {
     }
 
     private void perform(int extractorListId, List<Integer> variant) {
-        int i = 0;
-        for (ExtractingFeature extractingFeatures : extractingFeaturesList.get(extractorListId)) {
-            extractingFeatures.perform(variant.get(i/RunnerConfig.dataSetsRange));
-            i++;
+
+        if (RunnerConfig.extractionMethods.length > 0) {
+            for (ExtractionMethod m: RunnerConfig.extractionMethods) {
+                int i = 0;
+                for (ExtractingFeature extractingFeatures : extractingFeaturesList.get(extractorListId)) {
+                    extractingFeatures.perform(variant.get(i / RunnerConfig.dataSetsRange), m, null);
+                    i++;
+                }
+            }
+        } else if (RunnerConfig.wordSimilarities.length > 0) {
+            for (IWordSimilarity w: RunnerConfig.wordSimilarities) {
+                int i = 0;
+
+                for (ExtractingFeature extractingFeatures : extractingFeaturesList.get(extractorListId)) {
+                    extractingFeatures.perform(variant.get(i / RunnerConfig.dataSetsRange), null, w);
+                    i++;
+                }
+            }
+        }
+        else {
+            int i = 0;
+                for (ExtractingFeature extractingFeatures : extractingFeaturesList.get(extractorListId)) {
+                    extractingFeatures.perform(variant.get(i / RunnerConfig.dataSetsRange), null, null);
+                    i++;
+                }
         }
     }
 

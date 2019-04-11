@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class ExtractingKeyWords extends Configurable {
 
-    private int N = 20;
+    private int N = 5;
 
     private List<List<Article>> articles;
 
@@ -18,7 +18,7 @@ public class ExtractingKeyWords extends Configurable {
     private List<Map<ExtractionMethod, Map<String, List<String>>>> keyWordsList;
 
     public ExtractingKeyWords(int range, List<List<Article>> articles, KeyWordsData keyWordsdata) {
-        super(range);
+        super(RunnerConfig.dataSetsRange);
         this.articles = articles;
         this.keyWordsList = keyWordsdata.keyWordsList;
         this.keyWordsData = keyWordsdata;
@@ -26,6 +26,7 @@ public class ExtractingKeyWords extends Configurable {
 
     @Override
     public void perform(int i) {
+        System.out.println(range);
         keyWordsList.add(KeyWordExtractor.extractTopN(articles.get(i), N));
         keyWordsData.origin.add(articles.get(i).get(0).origin);
         System.out.println(articles.get(i).get(0).origin);

@@ -45,14 +45,25 @@ public class SentimentExtractor implements IFeatureExtractor<Article> {
     }
 
     @Override
-    public IWordSimilarity similarityMethod(int i) {
+    public void setM(ExtractionMethod m) {
+
+    }
+
+    @Override
+    public void setW(IWordSimilarity w) {
+
+    }
+
+    @Override
+    public ExtractionMethod getM() {
         return null;
     }
 
     @Override
-    public ExtractionMethod extractionMethod(int i) {
+    public IWordSimilarity getW() {
         return null;
     }
+
 
     private Double averageSentiment(List<Double> sentiments) {
         double sum = 0;

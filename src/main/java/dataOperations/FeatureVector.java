@@ -27,7 +27,7 @@ public class FeatureVector {
     public String getFeatureNamesToString() {
         String res = "";
         for (Feature feature: features) {
-            res += feature.getName() + " ";
+            res += feature.getName() + "(keywords extraction: " + ", word similarity: " + similarity + ") ";
         }
         return res;
     }

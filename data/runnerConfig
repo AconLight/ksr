@@ -1,8 +1,8 @@
-3
+10
 chebyshev
-overall_word_occurences
+tfidf
 ngram 2
 C:\train
 C:\test
-acq crude money-fx
-TOPICS
+west-germany usa france uk canada japan
+PLACES

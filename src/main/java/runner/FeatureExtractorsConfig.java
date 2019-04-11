@@ -4,6 +4,8 @@ import dataOperations.featureExtractors.AvgMaxKeyWordFeatureExtractor;
 import dataOperations.featureExtractors.FrequencyKeyWordExtractor;
 import dataOperations.featureExtractors.IFeatureExtractor;
 import dataOperations.featureExtractors.SentimentExtractor;
+import utils.ExtractionMethod;
+import word.similarity.GeneralizedNGramWithLimits;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -62,11 +64,21 @@ public class FeatureExtractorsConfig {
 
     public static FeatureExtractorsConfig fec3() {
         FeatureExtractorsConfig fec = new FeatureExtractorsConfig();
-        fec.extractors.add(new AvgMaxKeyWordFeatureExtractor());
-        fec.extractors.add(new FrequencyKeyWordExtractor());
-        fec.variantsList.add(Arrays.asList(2, 2));
-        fec.variantsList.add(Arrays.asList(1, 1));
+        IFeatureExtractor avg = new AvgMaxKeyWordFeatureExtractor();
+        avg.setM(ExtractionMethod.OVERALL_WORD_OCCURRENCES); avg.setW(new GeneralizedNGramWithLimits(2, 3));
+        IFeatureExtractor fq = new FrequencyKeyWordExtractor();
+        fq.setM(ExtractionMethod.OVERALL_WORD_OCCURRENCES); fq.setW(new GeneralizedNGramWithLimits(2, 3));
+        fec.extractors.add(avg);
+        fec.extractors.add(fq);
+//        fec.variantsList.add(Arrays.asList(0, 0));
         fec.variantsList.add(Arrays.asList(0, 0));
+//        fec.variantsList.add(Arrays.asList(12, 12));
+//        fec.variantsList.add(Arrays.asList(13, 13));
+//        fec.variantsList.add(Arrays.asList(14, 14));
+//        fec.variantsList.add(Arrays.asList(15, 15));
+//        fec.variantsList.add(Arrays.asList(16, 16));
+//        fec.variantsList.add(Arrays.asList(17, 17));
+
         return fec;
     }
 
