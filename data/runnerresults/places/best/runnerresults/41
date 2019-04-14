@@ -1,0 +1,59 @@
+{
+"title": "data set: dataSet(size: 500, div: 0.6)-train(size: 300) k in KNN: ( 12) knn metric: ( metrics.ChebyshevMetric) word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) key words extraction method: (OVERALL_WORD_OCCURRENCES) features: Avg max keywords (weights: [1.0, 0.6, 0.2, ]) { label: west-germany}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Avg max keywords (weights: [1.0, 0.6, 0.2, ]) { label: france}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Avg max keywords (weights: [1.0, 0.6, 0.2, ]) { label: uk}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Avg max keywords (weights: [1.0, 0.6, 0.2, ]) { label: canada}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Avg max keywords (weights: [1.0, 0.6, 0.2, ]) { label: japan}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Frequency keywords (N: 7) { label: west-germany}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Frequency keywords (N: 7) { label: france}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Frequency keywords (N: 7) { label: uk}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Frequency keywords (N: 7) { label: canada}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Frequency keywords (N: 7) { label: japan}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) )",
+"averageMacroPrecision": 0.30832848,
+"averageMacroRecall": 0.30150753,
+"averageMicroPrecision": 0.19487049,
+"averageMicroRecall": 0.18891403,
+"averageMacroPrecisionRecall": 0.609836,
+"precision": {
+"canada": 0.36196318,
+"japan": 0.027777778,
+"uk": NaN,
+"france": NaN,
+"west-germany": NaN
+},
+"recall": {
+"canada": 0.86764705,
+"japan": 0.07692308,
+"uk": 0.0,
+"france": 0.0,
+"west-germany": 0.0
+},
+"confusion matrix": [
+{"canada": [
+{"canada": 59},
+{"japan": 12},
+{"uk": 57},
+{"france": 19},
+{"west-germany": 16}
+]},
+{"japan": [
+{"canada": 9},
+{"japan": 1},
+{"uk": 16},
+{"france": 7},
+{"west-germany": 3}
+]},
+{"uk": [
+{"canada": null},
+{"japan": null},
+{"uk": null},
+{"france": null},
+{"west-germany": null}
+]},
+{"france": [
+{"canada": null},
+{"japan": null},
+{"uk": null},
+{"france": null},
+{"west-germany": null}
+]},
+{"west-germany": [
+{"canada": null},
+{"japan": null},
+{"uk": null},
+{"france": null},
+{"west-germany": null}
+]}
+]
+}

@@ -1,24 +1,26 @@
 {
-"title": "data set: dataSet(size: 200, div: 0.6)-train(size: 120) k in KNN: ( 9) knn metric: ( metrics.ChebyshevMetric) word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 1, upper limit: 2)) key words extraction method: (OVERALL_WORD_OCCURRENCES) features: Avg max keywords (weights: [1.0, 0.6, 0.2, ]) { label: mail}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 1, upper limit: 2)) Avg max keywords (weights: [1.0, 0.6, 0.2, ]) { label: spam}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 1, upper limit: 2)) Frequency keywords (N: 7) { label: mail}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 1, upper limit: 2)) Frequency keywords (N: 7) { label: spam}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 1, upper limit: 2)) )",
-"averagePrecision": 0.721519,
-"averageRecall": 0.721519,
-"averagePrecisionRecall": 1.443038,
+"title": "data set: dataSet(size: 500, div: 0.6)-train(size: 300) k in KNN: ( 1) knn metric: ( metrics.EuclideanMetric) word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) key words extraction method: (TFIDF) features: Avg max keywords (weights: [1.0, 0.6, 0.2, ]) { label: mail}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Avg max keywords (weights: [1.0, 0.6, 0.2, ]) { label: spam}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Frequency keywords (N: 7) { label: mail}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Frequency keywords (N: 7) { label: spam}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) )",
+"averageMacroPrecision": 0.80617374,
+"averageMacroRecall": 0.32160804,
+"averageMicroPrecision": 0.64285713,
+"averageMicroRecall": 0.5344828,
+"averageMacroPrecisionRecall": 1.1277817,
 "precision": {
-"mail": 0.721519,
-"spam": NaN
+"mail": 1.0,
+"spam": 0.2857143
 },
 "recall": {
-"mail": 1.0,
-"spam": 0.0
+"mail": 0.06896552,
+"spam": 1.0
 },
 "confusion matrix": [
 {"mail": [
-{"mail": 57},
-{"spam": 22}
+{"mail": 10},
+{"spam": null}
 ]},
 {"spam": [
-{"mail": null},
-{"spam": null}
+{"mail": 135},
+{"spam": 54}
 ]}
 ]
 }

@@ -1,0 +1,74 @@
+{
+"title": "data set: dataSet(size: 300, div: 0.3)-train(size: 90) k in KNN: ( 1) knn metric: ( metrics.ManhattanMetric) word similarity: word.similarity.NGram(n: 1)) key words extraction method: (TFIDF) features: Avg max keywords (weights: [0.6, 0.4, 0.2, ]) { label: usa}(keywords extraction: , word similarity: word.similarity.NGram(n: 1)) Avg max keywords (weights: [0.6, 0.4, 0.2, ]) { label: uk}(keywords extraction: , word similarity: word.similarity.NGram(n: 1)) Avg max keywords (weights: [0.6, 0.4, 0.2, ]) { label: canada}(keywords extraction: , word similarity: word.similarity.NGram(n: 1)) Frequency keywords (N: 7) { label: usa}(keywords extraction: , word similarity: word.similarity.NGram(n: 1)) Frequency keywords (N: 7) { label: uk}(keywords extraction: , word similarity: word.similarity.NGram(n: 1)) Frequency keywords (N: 7) { label: canada}(keywords extraction: , word similarity: word.similarity.NGram(n: 1)) )",
+"averageMacroPrecision": 0.805475,
+"averageMacroRecall": 0.31578946,
+"averageMicroPrecision": 0.7294101,
+"averageMicroRecall": 0.68605584,
+"averageMacroPrecisionRecall": 1.1212645,
+"precision": {
+"usa": 1.0,
+"canada": 0.90909094,
+"japan": 0.1570248,
+"uk": 0.31034482,
+"france": 1.0,
+"west-germany": 1.0
+},
+"recall": {
+"usa": 0.07751938,
+"canada": 0.5263158,
+"japan": 0.95,
+"uk": 0.5625,
+"france": 1.0,
+"west-germany": 1.0
+},
+"confusion matrix": [
+{"usa": [
+{"usa": 10},
+{"canada": null},
+{"japan": null},
+{"uk": null},
+{"france": null},
+{"west-germany": null}
+]},
+{"canada": [
+{"usa": 1},
+{"canada": 10},
+{"japan": null},
+{"uk": null},
+{"france": null},
+{"west-germany": null}
+]},
+{"japan": [
+{"usa": 81},
+{"canada": 7},
+{"japan": 19},
+{"uk": 14},
+{"france": null},
+{"west-germany": null}
+]},
+{"uk": [
+{"usa": 37},
+{"canada": 2},
+{"japan": 1},
+{"uk": 18},
+{"france": null},
+{"west-germany": null}
+]},
+{"france": [
+{"usa": null},
+{"canada": null},
+{"japan": null},
+{"uk": null},
+{"france": 6},
+{"west-germany": null}
+]},
+{"west-germany": [
+{"usa": null},
+{"canada": null},
+{"japan": null},
+{"uk": null},
+{"france": null},
+{"west-germany": 3}
+]}
+]
+}

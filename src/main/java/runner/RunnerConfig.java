@@ -36,6 +36,8 @@ public class RunnerConfig {
         dataSetsRange = BestRunnerConfig.dataSetsRange;
     }
 
+    public static String path = "";
+
     public static void setFromConfig() {
 
 

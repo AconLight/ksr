@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Config {
     public static  String tag = "PLACES";
-    public static String[] acceptedPlaces = {"west-germany", "france", "uk", "canada", "japan"};
+    public static String[] acceptedPlaces = {"usa", "west-germany", "france", "uk", "canada", "japan"};
     public static final String[] acceptedTopics = {"acq", "money-supply", "money-fx ", "crude", "copper"};
     public static final String[] acceptedMail = {"mail", "spam"};
     public static List<String> placesLabels = new ArrayList<>(Arrays.asList(acceptedPlaces));
@@ -23,6 +23,7 @@ public class Config {
     public static final Path initTestSetPath = rootPath.resolve("data").resolve("initTestSet");
     public static final Path resultsPath = rootPath.resolve("data").resolve("results");
     public static final Path runnerresultsPathDir = rootPath.resolve("data").resolve("runnerresults");
+    public static final Path guiResultPath = rootPath.resolve("data").resolve("guiresult");
     public static Path getRunnerresultsPath(String name1, String name2) {
         return rootPath.resolve("data").resolve("runnerresults").resolve(name1).resolve(name2).resolve("runnerresults");
     }

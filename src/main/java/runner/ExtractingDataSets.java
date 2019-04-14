@@ -9,6 +9,8 @@ import dataOperations.dataLoading.fileReaders.ReutersArticleReader;
 import dataOperations.preprocessing.FullPreprocessor;
 import dataOperations.preprocessing.IPreprocessor;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -38,14 +40,25 @@ public class ExtractingDataSets extends Configurable {
         IPreprocessor<String> preprocessor = new FullPreprocessor();
         IFileReader reader;
         List<Article> temp;
-        if (RunnerConfig.isMail) {
+        if (!RunnerConfig.path.equals("")) {
+            if (RunnerConfig.isMail) {
+                reader = new MailReader(preprocessor);
+            } else {
+                reader = new ReutersArticleReader(preprocessor);
+            }
+            Path path = Paths.get(RunnerConfig.path);
+            temp = loader.loadObjects(path, reader);
+            Collections.shuffle(temp, new Random(i));
+        }
+        else if (RunnerConfig.isMail) {
             reader = new MailReader(preprocessor);
             temp = loader.loadObjects(Config.mailSets, reader);
             temp.addAll(loader.loadObjects(Config.spamSets, reader));
             Collections.shuffle(temp, new Random(i));
         } else {
             reader = new ReutersArticleReader(preprocessor);
-            Collections.shuffle(temp = loader.loadObjects(Config.allSetPath, reader), new Random(i));
+            temp = loader.loadObjects(Config.allSetPath, reader);
+            Collections.shuffle(temp, new Random(i));
         }
 
 

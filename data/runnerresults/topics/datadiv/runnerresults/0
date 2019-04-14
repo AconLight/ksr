@@ -1,44 +1,46 @@
 {
-"title": "data set: dataSet(size: 200, div: 0.6)-train(size: 120) k in KNN: ( 9) knn metric: ( metrics.ChebyshevMetric) word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) key words extraction method: (OVERALL_WORD_OCCURRENCES) features: Avg max keywords (weights: [1.0, 0.6, 0.2, ]) { label: acq}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Avg max keywords (weights: [1.0, 0.6, 0.2, ]) { label: money-supply}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Avg max keywords (weights: [1.0, 0.6, 0.2, ]) { label: crude}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Avg max keywords (weights: [1.0, 0.6, 0.2, ]) { label: copper}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Frequency keywords (N: 7) { label: acq}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Frequency keywords (N: 7) { label: money-supply}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Frequency keywords (N: 7) { label: crude}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Frequency keywords (N: 7) { label: copper}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) )",
-"averagePrecision": 0.8567814,
-"averageRecall": 0.088607594,
-"averagePrecisionRecall": 0.94538903,
+"title": "data set: dataSet(size: 500, div: 0.3)-train(size: 150) k in KNN: ( 1) knn metric: ( metrics.EuclideanMetric) word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) key words extraction method: (TFIDF) features: Avg max keywords (weights: [1.0, 0.6, 0.2, ]) { label: acq}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Avg max keywords (weights: [1.0, 0.6, 0.2, ]) { label: money-supply}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Avg max keywords (weights: [1.0, 0.6, 0.2, ]) { label: crude}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Avg max keywords (weights: [1.0, 0.6, 0.2, ]) { label: copper}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Frequency keywords (N: 7) { label: acq}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Frequency keywords (N: 7) { label: money-supply}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Frequency keywords (N: 7) { label: crude}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Frequency keywords (N: 7) { label: copper}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) )",
+"averageMacroPrecision": 0.9652165,
+"averageMacroRecall": 0.106017195,
+"averageMicroPrecision": 0.6152502,
+"averageMicroRecall": 0.5352817,
+"averageMacroPrecisionRecall": 1.0712337,
 "precision": {
-"money-supply": 0.065789476,
-"copper": NaN,
+"money-supply": 0.44444445,
+"copper": 0.01655629,
 "acq": 1.0,
-"crude": 0.5
+"crude": 1.0
 },
 "recall": {
-"money-supply": 1.0,
-"copper": 0.0,
-"acq": 0.016666668,
-"crude": 0.07692308
+"money-supply": 0.9230769,
+"copper": 1.0,
+"acq": 0.036231883,
+"crude": 0.18181819
 },
 "confusion matrix": [
 {"money-supply": [
-{"money-supply": 10},
-{"copper": 2},
-{"acq": 116},
-{"crude": 24}
+{"money-supply": 72},
+{"copper": null},
+{"acq": 84},
+{"crude": 6}
 ]},
 {"copper": [
-{"money-supply": null},
-{"copper": null},
-{"acq": null},
-{"crude": null}
+{"money-supply": 6},
+{"copper": 30},
+{"acq": 1512},
+{"crude": 264}
 ]},
 {"acq": [
 {"money-supply": null},
 {"copper": null},
-{"acq": 2},
+{"acq": 60},
 {"crude": null}
 ]},
 {"crude": [
 {"money-supply": null},
 {"copper": null},
-{"acq": 2},
-{"crude": 2}
+{"acq": null},
+{"crude": 60}
 ]}
 ]
 }

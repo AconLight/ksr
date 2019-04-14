@@ -1,0 +1,26 @@
+{
+"title": "data set: dataSet(size: 500, div: 0.6)-train(size: 300) k in KNN: ( 3) knn metric: ( metrics.EuclideanMetric) word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) key words extraction method: (TFIDF) features: Avg max keywords (weights: [1.0, 0.6, 0.2, ]) { label: mail}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Avg max keywords (weights: [1.0, 0.6, 0.2, ]) { label: spam}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Frequency keywords (N: 7) { label: mail}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Frequency keywords (N: 7) { label: spam}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) )",
+"averageMacroPrecision": 0.5937992,
+"averageMacroRecall": 0.30150753,
+"averageMicroPrecision": 0.49227798,
+"averageMicroRecall": 0.4974457,
+"averageMacroPrecisionRecall": 0.8953067,
+"precision": {
+"mail": 0.71428573,
+"spam": 0.27027026
+},
+"recall": {
+"mail": 0.06896552,
+"spam": 0.9259259
+},
+"confusion matrix": [
+{"mail": [
+{"mail": 10},
+{"spam": 4}
+]},
+{"spam": [
+{"mail": 135},
+{"spam": 50}
+]}
+]
+}

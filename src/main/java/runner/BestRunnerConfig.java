@@ -1,7 +1,9 @@
 package runner;
 
 import metrics.ChebyshevMetric;
+import metrics.EuclideanMetric;
 import metrics.IMetric;
+import metrics.ManhattanMetric;
 import utils.ExtractionMethod;
 import word.similarity.GeneralizedNGramWithLimits;
 import word.similarity.IWordSimilarity;
@@ -20,7 +22,7 @@ public class BestRunnerConfig {
     };
 
     public static int[] dataSize = {
-            200
+            400
     };
 
     public static Boolean isMail = false;
@@ -42,21 +44,21 @@ public class BestRunnerConfig {
     public static List<Map<ExtractionMethod, Map<String, List<String>>>> keyWordsList;
 
     public static IWordSimilarity[] wordSimilarities = {
-            //new GeneralizedNGramWithLimits(2, 3),
+            new GeneralizedNGramWithLimits(2, 3),
 
     };
 
     public static IMetric[] metrics = {
             //new ManhattanMetric(),
-            //new EuclideanMetric(),
-            new ChebyshevMetric()
+            new EuclideanMetric(),
+            //new ChebyshevMetric()
     };
 
     public static ExtractionMethod[] extractionMethods = {
-            //ExtractionMethod.OVERALL_WORD_OCCURRENCES
+            ExtractionMethod.TFIDF
     };
 
-    public static int[] k = {9};
+    public static int[] k = {1};
 
     public static FeatureExtractorsConfig[] featureExtractorsConfig = {
             FeatureExtractorsConfig.fec3()

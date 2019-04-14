@@ -48,13 +48,50 @@ public class Runner {
 
     }
 
+    public void run() {
+        System.out.println("run");
+        save = guiResultPath;
+        reloadOperations();
+        perform();
+    }
+
     public void findBest() {
+        save = Config.getRunnerresultsPath("places", "best");
         RunnerConfig.set();
-        RunnerConfig.dataSetsRange = 2;
-        differentDataSize("places");
-        RunnerConfig.set();
-        RunnerConfig.dataSetsRange = 2;
-        differentDataDiv("places");
+        int[] size = {
+                500
+        };
+        RunnerConfig.dataSize = size;
+        float[] div = {
+                0.6f
+        };
+        RunnerConfig.dataDiv = div;
+        RunnerConfig.dataSetsRange = size.length*div.length;
+        ExtractionMethod[] extractionMethods = {
+                ExtractionMethod.TFIDF,
+                ExtractionMethod.OVERALL_WORD_COUNT,
+                ExtractionMethod.OVERALL_WORD_OCCURRENCES
+        };
+        RunnerConfig.extractionMethods = extractionMethods;
+        IWordSimilarity[] sims = {
+                new NGram(1),
+                new NGram(2),
+                new NGram(3),
+                new GeneralizedNGramWithLimits(1, 2),
+                new GeneralizedNGramWithLimits(1, 3),
+                new GeneralizedNGramWithLimits(2, 3)
+        };
+        RunnerConfig.wordSimilarities = sims;
+        IMetric[] metrics = {
+                new ChebyshevMetric(),
+                new ManhattanMetric(),
+                new EuclideanMetric()
+        };
+        RunnerConfig.metrics = metrics;
+        int[] k = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ,13, 14};
+        RunnerConfig.k = k;
+        reloadOperations();
+
         perform();
     }
 
@@ -88,20 +125,20 @@ public class Runner {
     public void differentDataSize(String etykieta) {
         save = Config.getRunnerresultsPath(etykieta, "datasize");
         int[] size = {
-                100, 150
+                300, 400, 500
         };
         RunnerConfig.dataSize = size;
-        RunnerConfig.dataSetsRange = 2;
+        RunnerConfig.dataSetsRange = 4;
         reloadOperations();
     }
 
     public void differentDataDiv(String etykieta) {
         save = Config.getRunnerresultsPath(etykieta, "datadiv");
         float[] div = {
-                0.4f, 0.6f
+                0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f
         };
         RunnerConfig.dataDiv = div;
-        RunnerConfig.dataSetsRange = 2;
+        RunnerConfig.dataSetsRange = 6;
         reloadOperations();
     }
 
@@ -119,12 +156,12 @@ public class Runner {
     public void differentWordSims(String etykieta) {
         save = Config.getRunnerresultsPath(etykieta, "wordsimilarity");
         IWordSimilarity[] sims = {
-//                new NGram(1),
-//                new NGram(2),
+                new NGram(1),
+                new NGram(2),
                 new NGram(3),
                 new GeneralizedNGramWithLimits(1, 2),
-//                new GeneralizedNGramWithLimits(1, 3),
-//                new GeneralizedNGramWithLimits(2, 3)
+                new GeneralizedNGramWithLimits(1, 3),
+                new GeneralizedNGramWithLimits(2, 3)
         };
         RunnerConfig.wordSimilarities = sims;
         reloadOperations();
@@ -135,7 +172,7 @@ public class Runner {
         IMetric[] metrics = {
                 new ChebyshevMetric(),
                 new ManhattanMetric(),
-//                new EuclideanMetric()
+                new EuclideanMetric()
         };
         RunnerConfig.metrics = metrics;
         reloadOperations();
@@ -143,7 +180,7 @@ public class Runner {
 
     public void differentK(String etykieta) {
         save = Config.getRunnerresultsPath(etykieta, "k");
-        int[] k = {3, 4};
+        int[] k = {1, 2, 3, 4, 5, 6, 7, 8};
         RunnerConfig.k = k;
         reloadOperations();
     }
@@ -178,10 +215,7 @@ public class Runner {
         }
         List<String> resultsStr = new ArrayList<>();
         List<String> bestResultsStr = new ArrayList<>();
-        //System.out.println("results:");
-        for (Result r: results) {
-            //System.out.println(r.dataSets);
-        }
+        System.out.println("results:");
 
         HashMap<String, List<Result>> experiments = new HashMap<>();
 
@@ -219,7 +253,7 @@ public class Runner {
             HashMap<String, Float> precision = new HashMap<>();
             HashMap<String, Float> recall = new HashMap<>();
             for (Result r: entry.getValue()) {
-                if (r.knn == r.originalLabel) good++;
+                if (r.knn.equals(r.originalLabel)) good++;
                 else bad++;
                 if (confMatrix.get((r.knn + " " + r.originalLabel)) == null) {
                     confMatrix.put((r.knn + " " + r.originalLabel), 1);
@@ -257,8 +291,10 @@ public class Runner {
                 }
 
             }
+            float avgPrecMic = 0;
             float avgPrec = 0;
             int sum = 0;
+            int sumMic = 0;
             for (Map.Entry<String, Integer> posEntry: positives.entrySet()) {
                 if (posEntry.getValue() == null) {
                     precision.put(posEntry.getKey(), 0f);
@@ -270,16 +306,19 @@ public class Runner {
                     precision.put(posEntry.getKey(), (1f * posEntry.getValue() / (posEntry.getValue() + neg)));
                     if ((posEntry.getValue() + neg) != 0) {
                         avgPrec += originalLabelsCount.get(posEntry.getKey())*(1f * posEntry.getValue() / (posEntry.getValue() + neg));
+                        avgPrecMic += (1f * posEntry.getValue() / (posEntry.getValue() + neg));
                         sum += originalLabelsCount.get(posEntry.getKey());
+                        sumMic ++;
                     }
                 }
             }
-
+            avgPrecMic /= 1f*sumMic;
             avgPrec /= sum;
 
-
+            float avgRecMic = 0;
             float avgRec = 0;
             int sumRec = 0;
+            sumMic = 0;
 
             for (Map.Entry<String, Integer> posEntry: positives.entrySet()) {
                 if (posEntry.getValue() == null) {
@@ -288,12 +327,17 @@ public class Runner {
                     recall.put(posEntry.getKey(), (1f * posEntry.getValue() / originalLabelsCount.get(posEntry.getKey())));
                     if ((originalLabelsCount.get(posEntry.getKey())) != 0) {
                         avgRec += originalLabelsCount.get(posEntry.getKey())*(1f * posEntry.getValue() / originalLabelsCount.get(posEntry.getKey()));
+                        avgRecMic += (1f * posEntry.getValue() / originalLabelsCount.get(posEntry.getKey()));
                         sumRec += originalLabelsCount.get(posEntry.getKey());
+                        sumMic ++;
                     }
                 }
             }
             //System.out.print(keyWordsData.keyWordsList);
+            avgRecMic /= 1f*sumMic;
             avgRec /= sumRec;
+
+            float accuracy = 1f*good/(good+bad);
 
             boolean isBest = false;
 
@@ -312,9 +356,11 @@ public class Runner {
                 isBest = true;
             }
 
-            rs += "\"averagePrecision\": " + avgPrec + ",\n";
-            rs += "\"averageRecall\": " + avgRec + ",\n";
-            rs += "\"averagePrecisionRecall\": " + (avgRec + avgPrec) + ",\n";
+            rs += "\"averageMacroPrecision\": " + avgPrec + ",\n";
+            rs += "\"averageMacroRecall\": " + avgRec + ",\n";
+            rs += "\"averageMicroPrecision\": " + avgPrecMic + ",\n";
+            rs += "\"averageMicroRecall\": " + avgRecMic + ",\n";
+            rs += "\"averageMacroPrecisionRecall\": " + (avgRec + avgPrec) + ",\n";
 
 
             rs += "\"precision\": {\n";

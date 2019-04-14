@@ -1,24 +1,26 @@
 {
-"title": "data set: dataSet(size: 150, div: 0.6)-train(size: 90) k in KNN: ( 9) knn metric: ( metrics.ChebyshevMetric) word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) key words extraction method: (OVERALL_WORD_OCCURRENCES) features: Avg max keywords (weights: [1.0, 0.6, 0.2, ]) { label: mail}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Avg max keywords (weights: [1.0, 0.6, 0.2, ]) { label: spam}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Frequency keywords (N: 7) { label: mail}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Frequency keywords (N: 7) { label: spam}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) )",
-"averagePrecision": 0.74576277,
-"averageRecall": 0.7457627,
-"averagePrecisionRecall": 1.4915254,
+"title": "data set: dataSet(size: 400, div: 0.6)-train(size: 240) k in KNN: ( 2) knn metric: ( metrics.ManhattanMetric) word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) key words extraction method: (OVERALL_WORD_OCCURRENCES) features: Avg max keywords (weights: [1.0, 0.6, 0.2, ]) { label: mail}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Avg max keywords (weights: [1.0, 0.6, 0.2, ]) { label: spam}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Frequency keywords (N: 7) { label: mail}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) Frequency keywords (N: 7) { label: spam}(keywords extraction: , word similarity: word.similarity.GeneralizedNGramWithLimits(lower limit: 2, upper limit: 3)) )",
+"averageMacroPrecision": 0.6750524,
+"averageMacroRecall": 0.35849056,
+"averageMicroPrecision": 0.5765306,
+"averageMicroRecall": 0.5250464,
+"averageMacroPrecisionRecall": 1.033543,
 "precision": {
-"mail": 0.7457627,
-"spam": NaN
+"mail": 0.8333333,
+"spam": 0.3197279
 },
 "recall": {
-"mail": 1.0,
-"spam": 0.0
+"mail": 0.09090909,
+"spam": 0.9591837
 },
 "confusion matrix": [
 {"mail": [
-{"mail": 88},
-{"spam": 30}
+{"mail": 40},
+{"spam": 8}
 ]},
 {"spam": [
-{"mail": null},
-{"spam": null}
+{"mail": 400},
+{"spam": 188}
 ]}
 ]
 }
